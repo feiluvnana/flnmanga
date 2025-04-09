@@ -1,0 +1,21 @@
+{
+  "dart.lineLength": 120,
+  "editor.rulers": [120],
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.tabSize": 2,
+  "explorer.compactFolders": true,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": true,
+  "explorer.fileNesting.patterns": {
+    "*.dart": "${capture}.*.dart",
+    "*_bloc.dart": "${capture}_*.dart",
+    "pubspec.yaml": "pubspec.lock, analysis_options.yaml, .metadata, *.iml",
+    "README.md": "CHANGELOG.md, LICENSE"
+  },
+  "dart.flutterSdkPath": "C:\\Users\\ADMIN\\.puro\\envs\\beta\\flutter",
+  "dart.sdkPath": "C:\\Users\\ADMIN\\.puro\\envs\\beta\\flutter\\bin\\cache\\dart-sdk"
+}
