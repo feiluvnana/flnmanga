@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:mangadexapi/mangadexapi.dart';
+import 'package:uuid/uuid.dart';
 
 void main() async {
-  final manga = await MangadexApi.getRandomManga();
-  print(const JsonEncoder.withIndent("  ").convert(manga.toMap()));
+  final chapters = await MangadexApi.getChapterById(UuidValue.fromString("bbf176a0-ea53-4b8b-8e23-8aa192e838d5"));
+  print(chapters);
 }
