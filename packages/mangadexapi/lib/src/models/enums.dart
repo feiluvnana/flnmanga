@@ -7,8 +7,6 @@ enum LegacyType { manga, chapter, tag, group }
 
 @MappableEnum()
 enum EntityType {
-  // ignore: constant_identifier_names
-  api_client,
   author,
   chapter,
   // ignore: constant_identifier_names
@@ -40,7 +38,6 @@ enum RelationshipType {
   user,
   creator,
   artist,
-  reason,
   leader,
   member,
 }

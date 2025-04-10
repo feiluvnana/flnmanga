@@ -69,13 +69,6 @@ class ArtistRelationship extends Relationship with ArtistRelationshipMappable {
   ArtistRelationship({required super.id, this.attributes});
 }
 
-@MappableClass(discriminatorValue: RelationshipType.reason)
-class ReasonRelationship extends Relationship with ReasonRelationshipMappable {
-  final ReasonAttributes? attributes;
-
-  ReasonRelationship({required super.id, this.attributes});
-}
-
 @MappableClass(discriminatorValue: RelationshipType.leader)
 class LeaderRelationship extends Relationship with LeaderRelationshipMappable {
   final UserAttributes? attributes;

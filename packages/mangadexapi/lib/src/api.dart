@@ -6,90 +6,16 @@ import 'package:mangadexapi/src/models/enums.dart';
 import 'package:mangadexapi/src/models/requests.dart';
 import 'package:mangadexapi/src/models/responses.dart';
 
-class AuthState {
-  final String accessToken;
-  final String refreshToken;
-
-  const AuthState({required this.accessToken, required this.refreshToken});
-}
-
 class MangadexApi {
   final http.Client _client;
   final String _baseUrl;
-  final String _authUrl;
 
-  AuthState? _authState;
-
-  MangadexApi({
-    http.Client? client,
-    String baseUrl = "https://api.mangadex.org",
-    String authUrl = "https://auth.mangadex.org/realms/mangadex/protocol/openid-connect/token",
-  }) : _client = client ?? http.Client(),
-       _baseUrl = baseUrl,
-       _authUrl = authUrl;
-
-  bool get isAuthenticated => _authState != null;
-
-  Future<void> authenticate({
-    required String username,
-    required String password,
-    required String clientId,
-    required String clientSecret,
-  }) async {
-    final response = await _client.post(
-      Uri.parse(_authUrl),
-      headers: {"Content-Type": "application/x-www-form-urlencoded"},
-      body: {
-        "grant_type": "password",
-        "username": username,
-        "password": password,
-        "client_id": clientId,
-        "client_secret": clientSecret,
-      },
-    );
-
-    if (response.statusCode ~/ 100 == 2) {
-      final data = jsonDecode(response.body) as Map<String, dynamic>;
-      _authState = AuthState(
-        accessToken: data["access_token"] as String,
-        refreshToken: data["refresh_token"] as String,
-      );
-    } else {
-      throw response.body;
-    }
-  }
-
-  Future<void> refresh({required String clientId, required String clientSecret}) async {
-    if (_authState == null) return;
-    final response = await _client.post(
-      Uri.parse(_authUrl),
-      headers: {"Content-Type": "application/x-www-form-urlencoded"},
-      body: {
-        "grant_type": "refresh_token",
-        "refresh_token": _authState!.refreshToken,
-        "client_id": clientId,
-        "client_secret": clientSecret,
-      },
-    );
-    if (response.statusCode ~/ 100 == 2) {
-      final data = jsonDecode(response.body) as Map<String, dynamic>;
-      _authState = AuthState(accessToken: data["access_token"] as String, refreshToken: _authState!.refreshToken);
-    } else {
-      throw response.body;
-    }
-  }
-
-  void logout() {
-    _authState = null;
-  }
+  MangadexApi({http.Client? client, String baseUrl = "https://api.mangadex.org"})
+    : _client = client ?? http.Client(),
+      _baseUrl = baseUrl;
 
   Future<T> _get<T>(Uri uri, T Function(String) fromJson) async {
-    final headers = <String, String>{};
-    if (_authState != null) {
-      headers["Authorization"] = "Bearer ${_authState!.accessToken}";
-    }
-
-    final response = await _client.get(uri, headers: headers);
+    final response = await _client.get(uri);
     if (response.statusCode ~/ 100 == 2) {
       final data = fromJson(response.body);
       return data;
@@ -121,13 +47,11 @@ class MangadexApi {
         if (includes != null) ...includes.toQueries(),
       },
     );
-
     return _get<CollectionResponse<Author>>(uri, CollectionResponseMapper.fromJson<Author>);
   }
 
   Future<EntityResponse<Author>> getAuthorById(Uuid id, {AuthorIncludesOptions? includes}) async {
     final uri = Uri.parse("$_baseUrl/author/$id").replace(queryParameters: includes?.toQueries());
-
     return _get<EntityResponse<Author>>(uri, EntityResponseMapper.fromJson<Author>);
   }
 
@@ -189,13 +113,11 @@ class MangadexApi {
         if (includes != null) ...includes.toQueries(),
       },
     );
-
     return _get<CollectionResponse<Chapter>>(uri, CollectionResponseMapper.fromJson<Chapter>);
   }
 
   Future<EntityResponse<Chapter>> getChapterById(Uuid id, {ChapterIncludesOptions? includes}) async {
     final uri = Uri.parse("$_baseUrl/chapter/$id").replace(queryParameters: includes?.toQueries());
-
     return _get<EntityResponse<Chapter>>(uri, EntityResponseMapper.fromJson<Chapter>);
   }
 
@@ -228,19 +150,16 @@ class MangadexApi {
         if (includes != null) ...includes.toQueries(),
       },
     );
-
     return _get<CollectionResponse<CoverArt>>(uri, CollectionResponseMapper.fromJson<CoverArt>);
   }
 
   Future<EntityResponse<CoverArt>> getCoverArtByMangaOrCoverId(Uuid id, {CoverArtIncludesOptions? includes}) async {
     final uri = Uri.parse("$_baseUrl/cover/$id").replace(queryParameters: includes?.toQueries());
-
     return _get<EntityResponse<CoverArt>>(uri, EntityResponseMapper.fromJson<CoverArt>);
   }
 
   Future<CollectionResponse<CustomList>> getCustomListById(Uuid id) async {
     final uri = Uri.parse("$_baseUrl/list/$id");
-
     return _get<CollectionResponse<CustomList>>(uri, CollectionResponseMapper.fromJson<CustomList>);
   }
 
@@ -251,7 +170,6 @@ class MangadexApi {
     final uri = Uri.parse("$_baseUrl/user/$id/list").replace(
       queryParameters: {if (limit != null) "limit": limit.toString(), if (offset != null) "offset": offset.toString()},
     );
-
     return _get<CollectionResponse<CustomList>>(uri, CollectionResponseMapper.fromJson<CustomList>);
   }
 
@@ -299,13 +217,11 @@ class MangadexApi {
         if (includes != null) ...includes.toQueries(),
       },
     );
-
     return _get<CollectionResponse<Chapter>>(uri, CollectionResponseMapper.fromJson<Chapter>);
   }
 
   Future<String> ping() async {
     final uri = Uri.parse("$_baseUrl/ping");
-
     return _get<String>(uri, (data) => data);
   }
 
@@ -385,13 +301,11 @@ class MangadexApi {
         if (group != null) "group": group.toString(),
       },
     );
-
     return _get<CollectionResponse<Manga>>(uri, CollectionResponseMapper.fromJson<Manga>);
   }
 
   Future<EntityResponse<Manga>> getMangaById(Uuid id, {MangaIncludesOptions? includes}) async {
     final uri = Uri.parse("$_baseUrl/manga/$id").replace(queryParameters: includes?.toQueries());
-
     return _get<EntityResponse<Manga>>(uri, EntityResponseMapper.fromJson<Manga>);
   }
 
@@ -439,7 +353,6 @@ class MangadexApi {
         if (includes != null) ...includes.toQueries(),
       },
     );
-
     return _get<CollectionResponse<Chapter>>(uri, CollectionResponseMapper.fromJson<Chapter>);
   }
 
@@ -461,7 +374,6 @@ class MangadexApi {
         if (excludedTagsMode != null) "excludedTagsMode": excludedTagsMode.name,
       },
     );
-
     return _get<EntityResponse<Manga>>(uri, EntityResponseMapper.fromJson<Manga>);
   }
 
@@ -476,7 +388,6 @@ class MangadexApi {
     MangaRelationIncludesOptions? includes,
   }) async {
     final uri = Uri.parse("$_baseUrl/manga/$id/relation").replace(queryParameters: includes?.toQueries());
-
     return _get<CollectionResponse<MangaRelation>>(uri, CollectionResponseMapper.fromJson<MangaRelation>);
   }
 
@@ -504,7 +415,6 @@ class MangadexApi {
         if (includes != null) ...includes.toQueries(),
       },
     );
-
     return _get<CollectionResponse<ScanlationGroup>>(uri, CollectionResponseMapper.fromJson<ScanlationGroup>);
   }
 
@@ -513,7 +423,11 @@ class MangadexApi {
     ScanlationGroupIncludesOptions? includes,
   }) async {
     final uri = Uri.parse("$_baseUrl/scanlation-group/$id").replace(queryParameters: includes?.toQueries());
-
     return _get<EntityResponse<ScanlationGroup>>(uri, EntityResponseMapper.fromJson<ScanlationGroup>);
+  }
+
+  Future<EntityResponse<User>> getUserById(Uuid id) async {
+    final uri = Uri.parse("$_baseUrl/user/$id");
+    return _get<EntityResponse<User>>(uri, EntityResponseMapper.fromJson<User>);
   }
 }

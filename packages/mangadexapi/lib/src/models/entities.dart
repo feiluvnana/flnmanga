@@ -12,13 +12,6 @@ abstract class Entity with EntityMappable {
   const Entity({required this.id, required this.relationships});
 }
 
-@MappableClass(discriminatorValue: EntityType.api_client)
-class ApiClient extends Entity with ApiClientMappable {
-  final ApiClientAttributes attributes;
-
-  const ApiClient({required super.id, required this.attributes, required super.relationships});
-}
-
 @MappableClass(discriminatorValue: EntityType.author)
 class Author extends Entity with AuthorMappable {
   final AuthorAttributes attributes;

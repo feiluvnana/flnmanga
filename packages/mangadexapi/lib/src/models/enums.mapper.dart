@@ -79,8 +79,6 @@ class EntityTypeMapper extends EnumMapper<EntityType> {
   @override
   EntityType decode(dynamic value) {
     switch (value) {
-      case r'api_client':
-        return EntityType.api_client;
       case r'author':
         return EntityType.author;
       case r'chapter':
@@ -109,8 +107,6 @@ class EntityTypeMapper extends EnumMapper<EntityType> {
   @override
   dynamic encode(EntityType self) {
     switch (self) {
-      case EntityType.api_client:
-        return r'api_client';
       case EntityType.author:
         return r'author';
       case EntityType.chapter:
@@ -177,8 +173,6 @@ class RelationshipTypeMapper extends EnumMapper<RelationshipType> {
         return RelationshipType.creator;
       case r'artist':
         return RelationshipType.artist;
-      case r'reason':
-        return RelationshipType.reason;
       case r'leader':
         return RelationshipType.leader;
       case r'member':
@@ -207,8 +201,6 @@ class RelationshipTypeMapper extends EnumMapper<RelationshipType> {
         return r'creator';
       case RelationshipType.artist:
         return r'artist';
-      case RelationshipType.reason:
-        return r'reason';
       case RelationshipType.leader:
         return r'leader';
       case RelationshipType.member:
