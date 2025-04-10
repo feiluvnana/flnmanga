@@ -1,6 +1,7 @@
 library;
 
 export 'src/api.dart';
-export 'src/model/attribute.dart';
-export 'src/model/entity.dart';
-export 'src/model/relationship.dart';
+export 'src/models/attributes.dart';
+export 'src/models/entities.dart';
+export 'src/models/relationships.dart';
+export 'src/utils/uuid.dart';

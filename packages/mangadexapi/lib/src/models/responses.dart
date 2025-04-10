@@ -1,9 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:mangadexapi/mangadexapi.dart';
-import 'package:mangadexapi/src/util.dart';
-import 'package:uuid/uuid.dart';
 
-part 'response.mapper.dart';
+part 'responses.mapper.dart';
 
 @MappableClass(discriminatorKey: "result")
 class Response with ResponseMappable {
@@ -39,9 +37,9 @@ class ErrorResponse extends Response with ErrorResponseMappable {
   ErrorResponse({required this.errors});
 }
 
-@MappableClass(includeCustomMappers: [UuidValueMapper()])
+@MappableClass()
 class Error with ErrorMappable {
-  final UuidValue id;
+  final Uuid id;
   final int status;
   final String title;
   final String? detail;

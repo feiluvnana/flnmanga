@@ -4,7 +4,7 @@
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
-part of 'response.dart';
+part of 'responses.dart';
 
 class ResponseMapper extends ClassMapperBase<Response> {
   ResponseMapper._();
@@ -629,7 +629,6 @@ class ErrorMapper extends ClassMapperBase<Error> {
   static ErrorMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ErrorMapper._());
-      MapperContainer.globals.useAll([UuidValueMapper()]);
     }
     return _instance!;
   }
@@ -637,8 +636,8 @@ class ErrorMapper extends ClassMapperBase<Error> {
   @override
   final String id = 'Error';
 
-  static UuidValue _$id(Error v) => v.id;
-  static const Field<Error, UuidValue> _f$id = Field('id', _$id);
+  static Uuid _$id(Error v) => v.id;
+  static const Field<Error, Uuid> _f$id = Field('id', _$id);
   static int _$status(Error v) => v.status;
   static const Field<Error, int> _f$status = Field('status', _$status);
   static String _$title(Error v) => v.title;
@@ -715,11 +714,7 @@ extension ErrorValueCopy<$R, $Out> on ObjectCopyWith<$R, Error, $Out> {
 abstract class ErrorCopyWith<$R, $In extends Error, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   $R call(
-      {UuidValue? id,
-      int? status,
-      String? title,
-      String? detail,
-      String? context});
+      {Uuid? id, int? status, String? title, String? detail, String? context});
   ErrorCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -731,7 +726,7 @@ class _ErrorCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Error, $Out>
   late final ClassMapperBase<Error> $mapper = ErrorMapper.ensureInitialized();
   @override
   $R call(
-          {UuidValue? id,
+          {Uuid? id,
           int? status,
           String? title,
           Object? detail = $none,
