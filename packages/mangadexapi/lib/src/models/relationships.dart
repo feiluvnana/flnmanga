@@ -5,87 +5,129 @@ import 'package:mangadexapi/src/utils/uuid.dart';
 
 part 'relationships.mapper.dart';
 
+bool _checkType(dynamic raw, RelationshipType value) => raw is Map && raw["type"] == value.name;
+
 @MappableClass(discriminatorKey: "type", includeCustomMappers: [UuidMapper()])
-abstract class Relationship with RelationshipMappable {
+sealed class Relationship with RelationshipMappable {
   final Uuid id;
 
-  Relationship({required this.id});
+  const Relationship({required this.id});
 }
 
-@MappableClass(discriminatorValue: RelationshipType.author)
+@MappableClass(discriminatorValue: AuthorRelationship.checkType)
 class AuthorRelationship extends Relationship with AuthorRelationshipMappable {
   final AuthorAttributes? attributes;
 
-  AuthorRelationship({required super.id, this.attributes});
+  const AuthorRelationship({required super.id, this.attributes});
+
+  static bool checkType(value) {
+    return _checkType(value, RelationshipType.author);
+  }
 }
 
-@MappableClass(discriminatorValue: RelationshipType.cover_art)
+@MappableClass(discriminatorValue: CoverArtRelationship.checkType)
 class CoverArtRelationship extends Relationship with CoverArtRelationshipMappable {
   final CoverArtAttributes? attributes;
 
-  CoverArtRelationship({required super.id, this.attributes});
+  const CoverArtRelationship({required super.id, this.attributes});
+
+  static bool checkType(value) {
+    return _checkType(value, RelationshipType.cover_art);
+  }
 }
 
-@MappableClass(discriminatorValue: RelationshipType.manga)
+@MappableClass(discriminatorValue: MangaRelationship.checkType)
 class MangaRelationship extends Relationship with MangaRelationshipMappable {
   final MangaRelated? related;
   final MangaAttributes? attributes;
 
-  MangaRelationship({required super.id, this.related, this.attributes});
+  const MangaRelationship({required super.id, this.related, this.attributes});
+
+  static bool checkType(value) {
+    return _checkType(value, RelationshipType.manga);
+  }
 }
 
-@MappableClass(discriminatorValue: RelationshipType.tag)
+@MappableClass(discriminatorValue: TagRelationship.checkType)
 class TagRelationship extends Relationship with TagRelationshipMappable {
   final TagAttributes? attributes;
 
-  TagRelationship({required super.id, this.attributes});
+  const TagRelationship({required super.id, this.attributes});
+
+  static bool checkType(value) {
+    return _checkType(value, RelationshipType.tag);
+  }
 }
 
-@MappableClass(discriminatorValue: RelationshipType.scanlation_group)
+@MappableClass(discriminatorValue: ScanlationGroupRelationship.checkType)
 class ScanlationGroupRelationship extends Relationship with ScanlationGroupRelationshipMappable {
   final ScanlationGroupAttributes? attributes;
 
-  ScanlationGroupRelationship({required super.id, this.attributes});
+  const ScanlationGroupRelationship({required super.id, this.attributes});
+
+  static bool checkType(value) {
+    return _checkType(value, RelationshipType.scanlation_group);
+  }
 }
 
-@MappableClass(discriminatorValue: RelationshipType.user)
+@MappableClass(discriminatorValue: UserRelationship.checkType)
 class UserRelationship extends Relationship with UserRelationshipMappable {
   final UserAttributes? attributes;
 
-  UserRelationship({required super.id, this.attributes});
+  const UserRelationship({required super.id, this.attributes});
+
+  static bool checkType(value) {
+    return _checkType(value, RelationshipType.user);
+  }
 }
 
-@MappableClass(discriminatorValue: RelationshipType.creator)
+@MappableClass(discriminatorValue: CreatorRelationship.checkType)
 class CreatorRelationship extends Relationship with CreatorRelationshipMappable {
   final UserAttributes? attributes;
 
-  CreatorRelationship({required super.id, this.attributes});
+  const CreatorRelationship({required super.id, this.attributes});
+
+  static bool checkType(value) {
+    return _checkType(value, RelationshipType.creator);
+  }
 }
 
-@MappableClass(discriminatorValue: RelationshipType.artist)
+@MappableClass(discriminatorValue: ArtistRelationship.checkType)
 class ArtistRelationship extends Relationship with ArtistRelationshipMappable {
   final AuthorAttributes? attributes;
 
-  ArtistRelationship({required super.id, this.attributes});
+  const ArtistRelationship({required super.id, this.attributes});
+
+  static bool checkType(value) {
+    return _checkType(value, RelationshipType.artist);
+  }
 }
 
-@MappableClass(discriminatorValue: RelationshipType.leader)
+@MappableClass(discriminatorValue: LeaderRelationship.checkType)
 class LeaderRelationship extends Relationship with LeaderRelationshipMappable {
   final UserAttributes? attributes;
 
-  LeaderRelationship({required super.id, this.attributes});
+  const LeaderRelationship({required super.id, this.attributes});
+
+  static bool checkType(value) {
+    return _checkType(value, RelationshipType.leader);
+  }
 }
 
-@MappableClass(discriminatorValue: RelationshipType.member)
+@MappableClass(discriminatorValue: MemberRelationship.checkType)
 class MemberRelationship extends Relationship with MemberRelationshipMappable {
   final UserAttributes? attributes;
 
-  MemberRelationship({required super.id, this.attributes});
+  const MemberRelationship({required super.id, this.attributes});
+
+  static bool checkType(value) {
+    return _checkType(value, RelationshipType.member);
+  }
 }
 
 @MappableClass(discriminatorValue: MappableClass.useAsDefault)
 class DefaultRelationship extends Relationship with DefaultRelationshipMappable {
-  final String type;
+  final RelationshipType type;
 
-  DefaultRelationship({required super.id, required this.type});
+  const DefaultRelationship({required super.id, required this.type});
 }

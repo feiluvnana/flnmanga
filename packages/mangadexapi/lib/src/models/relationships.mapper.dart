@@ -100,7 +100,7 @@ class AuthorRelationshipMapper extends SubClassMapperBase<AuthorRelationship> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = RelationshipType.author;
+  final dynamic discriminatorValue = AuthorRelationship.checkType;
   @override
   late final ClassMapperBase superMapper =
       RelationshipMapper.ensureInitialized();
@@ -234,7 +234,7 @@ class CoverArtRelationshipMapper
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = RelationshipType.cover_art;
+  final dynamic discriminatorValue = CoverArtRelationship.checkType;
   @override
   late final ClassMapperBase superMapper =
       RelationshipMapper.ensureInitialized();
@@ -373,7 +373,7 @@ class MangaRelationshipMapper extends SubClassMapperBase<MangaRelationship> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = RelationshipType.manga;
+  final dynamic discriminatorValue = MangaRelationship.checkType;
   @override
   late final ClassMapperBase superMapper =
       RelationshipMapper.ensureInitialized();
@@ -510,7 +510,7 @@ class TagRelationshipMapper extends SubClassMapperBase<TagRelationship> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = RelationshipType.tag;
+  final dynamic discriminatorValue = TagRelationship.checkType;
   @override
   late final ClassMapperBase superMapper =
       RelationshipMapper.ensureInitialized();
@@ -644,7 +644,7 @@ class ScanlationGroupRelationshipMapper
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = RelationshipType.scanlation_group;
+  final dynamic discriminatorValue = ScanlationGroupRelationship.checkType;
   @override
   late final ClassMapperBase superMapper =
       RelationshipMapper.ensureInitialized();
@@ -787,7 +787,7 @@ class UserRelationshipMapper extends SubClassMapperBase<UserRelationship> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = RelationshipType.user;
+  final dynamic discriminatorValue = UserRelationship.checkType;
   @override
   late final ClassMapperBase superMapper =
       RelationshipMapper.ensureInitialized();
@@ -918,7 +918,7 @@ class CreatorRelationshipMapper
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = RelationshipType.creator;
+  final dynamic discriminatorValue = CreatorRelationship.checkType;
   @override
   late final ClassMapperBase superMapper =
       RelationshipMapper.ensureInitialized();
@@ -1048,7 +1048,7 @@ class ArtistRelationshipMapper extends SubClassMapperBase<ArtistRelationship> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = RelationshipType.artist;
+  final dynamic discriminatorValue = ArtistRelationship.checkType;
   @override
   late final ClassMapperBase superMapper =
       RelationshipMapper.ensureInitialized();
@@ -1180,7 +1180,7 @@ class LeaderRelationshipMapper extends SubClassMapperBase<LeaderRelationship> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = RelationshipType.leader;
+  final dynamic discriminatorValue = LeaderRelationship.checkType;
   @override
   late final ClassMapperBase superMapper =
       RelationshipMapper.ensureInitialized();
@@ -1310,7 +1310,7 @@ class MemberRelationshipMapper extends SubClassMapperBase<MemberRelationship> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = RelationshipType.member;
+  final dynamic discriminatorValue = MemberRelationship.checkType;
   @override
   late final ClassMapperBase superMapper =
       RelationshipMapper.ensureInitialized();
@@ -1418,6 +1418,7 @@ class DefaultRelationshipMapper
     if (_instance == null) {
       MapperContainer.globals.use(_instance = DefaultRelationshipMapper._());
       RelationshipMapper.ensureInitialized().addSubMapper(_instance!);
+      RelationshipTypeMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -1427,8 +1428,8 @@ class DefaultRelationshipMapper
 
   static Uuid _$id(DefaultRelationship v) => v.id;
   static const Field<DefaultRelationship, Uuid> _f$id = Field('id', _$id);
-  static String _$type(DefaultRelationship v) => v.type;
-  static const Field<DefaultRelationship, String> _f$type =
+  static RelationshipType _$type(DefaultRelationship v) => v.type;
+  static const Field<DefaultRelationship, RelationshipType> _f$type =
       Field('type', _$type);
 
   @override
@@ -1505,7 +1506,7 @@ extension DefaultRelationshipValueCopy<$R, $Out>
 abstract class DefaultRelationshipCopyWith<$R, $In extends DefaultRelationship,
     $Out> implements RelationshipCopyWith<$R, $In, $Out> {
   @override
-  $R call({Uuid? id, String? type});
+  $R call({Uuid? id, RelationshipType? type});
   DefaultRelationshipCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -1519,7 +1520,7 @@ class _DefaultRelationshipCopyWithImpl<$R, $Out>
   late final ClassMapperBase<DefaultRelationship> $mapper =
       DefaultRelationshipMapper.ensureInitialized();
   @override
-  $R call({Uuid? id, String? type}) => $apply(FieldCopyWithData(
+  $R call({Uuid? id, RelationshipType? type}) => $apply(FieldCopyWithData(
       {if (id != null) #id: id, if (type != null) #type: type}));
   @override
   DefaultRelationship $make(CopyWithData data) => DefaultRelationship(

@@ -1,28 +1,40 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:mangadexapi/mangadexapi.dart';
 import 'package:mangadexapi/src/models/enums.dart';
-import 'package:mangadexapi/src/models/requests.dart';
 import 'package:mangadexapi/src/models/responses.dart';
+import 'package:mangadexapi/src/utils/cache.dart';
 
 class MangadexApi {
-  final http.Client _client;
+  final Client _client;
+  final Cache _cache;
   final String _baseUrl;
 
-  MangadexApi({http.Client? client, String baseUrl = "https://api.mangadex.org"})
-    : _client = client ?? http.Client(),
+  MangadexApi({Client? client, Cache? cache, String baseUrl = "https://api.mangadex.org"})
+    : _client = client ?? Client(),
+      _cache = cache ?? InMemoryCache(ttl: const Duration(hours: 1)),
       _baseUrl = baseUrl;
 
   Future<T> _get<T>(Uri uri, T Function(String) fromJson) async {
+    final cached = await _cache.get(uri.toString());
+    if (cached != null) {
+      return fromJson(cached);
+    }
+
     final response = await _client.get(uri);
     if (response.statusCode ~/ 100 == 2) {
+      _cache.set(uri.toString(), response.body).ignore();
       final data = fromJson(response.body);
       return data;
     } else {
       final error = ErrorResponseMapper.fromJson(response.body);
       throw error;
     }
+  }
+
+  Future<void> wipeCache() async {
+    await _cache.wipe();
   }
 
   Future<CollectionResponse<Author>> getAuthors({
@@ -272,7 +284,7 @@ class MangadexApi {
     assert(offset == null || offset >= 0, "`offset` must be greater than or equal to 0.");
     assert(ids == null || ids.length <= 100, "`ids` can't have more than 100 elements.");
 
-    final uri = Uri.parse("$_baseUrl/chapter").replace(
+    final uri = Uri.parse("$_baseUrl/manga").replace(
       queryParameters: {
         if (limit != null) "limit": limit.toString(),
         if (offset != null) "offset": offset.toString(),

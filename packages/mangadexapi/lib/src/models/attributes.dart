@@ -247,8 +247,8 @@ class ScanlationGroupAttributes with ScanlationGroupAttributesMappable {
   final bool official;
   final bool verified;
   final bool inactive;
-  final bool exLicensed;
-  final String publishDelay;
+  final bool? exLicensed;
+  final String? publishDelay;
   final int version;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -269,8 +269,8 @@ class ScanlationGroupAttributes with ScanlationGroupAttributesMappable {
     required this.official,
     required this.verified,
     required this.inactive,
-    required this.exLicensed,
-    required this.publishDelay,
+    this.exLicensed,
+    this.publishDelay,
     required this.version,
     required this.createdAt,
     required this.updatedAt,

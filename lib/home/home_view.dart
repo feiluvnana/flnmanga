@@ -1,37 +1,23 @@
-import 'package:flnmanga/history/view/history_view.dart';
-import 'package:flnmanga/library/view/library_view.dart';
-import 'package:flnmanga/settings/view/settings_view.dart';
-import 'package:flnmanga/updates/view/updates_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-import '../bloc/home_bloc.dart';
-
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  final GoRouterState state;
+  final Widget child;
+
+  const HomeView({super.key, required this.state, required this.child});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => HomeBloc(), child: const _HomeView());
-  }
-}
-
-class _HomeView extends StatelessWidget {
-  const _HomeView();
-
-  @override
-  Widget build(BuildContext context) {
-    final selectedIndex = context.select<HomeBloc, int>((bloc) => bloc.state.selectedIndex);
-
     return Scaffold(
-      body: [const LibraryView(), const UpdatesView(), const HistoryView(), const SettingsView()][selectedIndex],
+      body: child,
       bottomNavigationBar: SalomonBottomBar(
         splashActive: false,
-        currentIndex: selectedIndex,
+        currentIndex: ["/library", "/updates", "/history", "/browse", "/settings"].indexOf(state.uri.toString()),
         onTap: (index) {
-          context.read<HomeBloc>().add(HomeTabChanged(index: index));
+          context.go(["/library", "/updates", "/history", "/browse", "/settings"][index]);
         },
         items: [
           SalomonBottomBarItem(
@@ -48,6 +34,11 @@ class _HomeView extends StatelessWidget {
             icon: const Icon(Symbols.work_history),
             activeIcon: const Icon(Symbols.work_history, fill: 1),
             title: const Text("History"),
+          ),
+          SalomonBottomBarItem(
+            icon: const Icon(Symbols.browse),
+            activeIcon: const Icon(Symbols.browse, fill: 1),
+            title: const Text("Browse"),
           ),
           SalomonBottomBarItem(
             icon: const Icon(Symbols.settings),

@@ -1994,12 +1994,12 @@ class ScanlationGroupAttributesMapper
   static bool _$inactive(ScanlationGroupAttributes v) => v.inactive;
   static const Field<ScanlationGroupAttributes, bool> _f$inactive =
       Field('inactive', _$inactive);
-  static bool _$exLicensed(ScanlationGroupAttributes v) => v.exLicensed;
+  static bool? _$exLicensed(ScanlationGroupAttributes v) => v.exLicensed;
   static const Field<ScanlationGroupAttributes, bool> _f$exLicensed =
-      Field('exLicensed', _$exLicensed);
-  static String _$publishDelay(ScanlationGroupAttributes v) => v.publishDelay;
+      Field('exLicensed', _$exLicensed, opt: true);
+  static String? _$publishDelay(ScanlationGroupAttributes v) => v.publishDelay;
   static const Field<ScanlationGroupAttributes, String> _f$publishDelay =
-      Field('publishDelay', _$publishDelay);
+      Field('publishDelay', _$publishDelay, opt: true);
   static int _$version(ScanlationGroupAttributes v) => v.version;
   static const Field<ScanlationGroupAttributes, int> _f$version =
       Field('version', _$version);
@@ -2177,8 +2177,8 @@ class _ScanlationGroupAttributesCopyWithImpl<$R, $Out>
           bool? official,
           bool? verified,
           bool? inactive,
-          bool? exLicensed,
-          String? publishDelay,
+          Object? exLicensed = $none,
+          Object? publishDelay = $none,
           int? version,
           DateTime? createdAt,
           DateTime? updatedAt}) =>
@@ -2198,8 +2198,8 @@ class _ScanlationGroupAttributesCopyWithImpl<$R, $Out>
         if (official != null) #official: official,
         if (verified != null) #verified: verified,
         if (inactive != null) #inactive: inactive,
-        if (exLicensed != null) #exLicensed: exLicensed,
-        if (publishDelay != null) #publishDelay: publishDelay,
+        if (exLicensed != $none) #exLicensed: exLicensed,
+        if (publishDelay != $none) #publishDelay: publishDelay,
         if (version != null) #version: version,
         if (createdAt != null) #createdAt: createdAt,
         if (updatedAt != null) #updatedAt: updatedAt

@@ -112,7 +112,7 @@ class AuthorMapper extends SubClassMapperBase<Author> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = EntityType.author;
+  final dynamic discriminatorValue = Author.checkType;
   @override
   late final ClassMapperBase superMapper = EntityMapper.ensureInitialized();
 
@@ -255,7 +255,7 @@ class ChapterMapper extends SubClassMapperBase<Chapter> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = EntityType.chapter;
+  final dynamic discriminatorValue = Chapter.checkType;
   @override
   late final ClassMapperBase superMapper = EntityMapper.ensureInitialized();
 
@@ -404,7 +404,7 @@ class CoverArtMapper extends SubClassMapperBase<CoverArt> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = EntityType.cover_art;
+  final dynamic discriminatorValue = CoverArt.checkType;
   @override
   late final ClassMapperBase superMapper = EntityMapper.ensureInitialized();
 
@@ -554,7 +554,7 @@ class CustomListMapper extends SubClassMapperBase<CustomList> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = EntityType.custom_list;
+  final dynamic discriminatorValue = CustomList.checkType;
   @override
   late final ClassMapperBase superMapper = EntityMapper.ensureInitialized();
 
@@ -706,7 +706,7 @@ class MappingIdMapper extends SubClassMapperBase<MappingId> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = EntityType.mapping_id;
+  final dynamic discriminatorValue = MappingId.checkType;
   @override
   late final ClassMapperBase superMapper = EntityMapper.ensureInitialized();
 
@@ -857,7 +857,7 @@ class MangaMapper extends SubClassMapperBase<Manga> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = EntityType.manga;
+  final dynamic discriminatorValue = Manga.checkType;
   @override
   late final ClassMapperBase superMapper = EntityMapper.ensureInitialized();
 
@@ -999,7 +999,7 @@ class TagMapper extends SubClassMapperBase<Tag> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = EntityType.tag;
+  final dynamic discriminatorValue = Tag.checkType;
   @override
   late final ClassMapperBase superMapper = EntityMapper.ensureInitialized();
 
@@ -1138,7 +1138,7 @@ class MangaRelationMapper extends SubClassMapperBase<MangaRelation> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = EntityType.manga_relation;
+  final dynamic discriminatorValue = MangaRelation.checkType;
   @override
   late final ClassMapperBase superMapper = EntityMapper.ensureInitialized();
 
@@ -1294,7 +1294,7 @@ class ScanlationGroupMapper extends SubClassMapperBase<ScanlationGroup> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = EntityType.scanlation_group;
+  final dynamic discriminatorValue = ScanlationGroup.checkType;
   @override
   late final ClassMapperBase superMapper = EntityMapper.ensureInitialized();
 
@@ -1450,7 +1450,7 @@ class UserMapper extends SubClassMapperBase<User> {
   @override
   final String discriminatorKey = 'type';
   @override
-  final dynamic discriminatorValue = EntityType.user;
+  final dynamic discriminatorValue = User.checkType;
   @override
   late final ClassMapperBase superMapper = EntityMapper.ensureInitialized();
 
@@ -1563,6 +1563,7 @@ class DefaultEntityMapper extends SubClassMapperBase<DefaultEntity> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = DefaultEntityMapper._());
       EntityMapper.ensureInitialized().addSubMapper(_instance!);
+      EntityTypeMapper.ensureInitialized();
       RelationshipMapper.ensureInitialized();
     }
     return _instance!;
@@ -1573,17 +1574,17 @@ class DefaultEntityMapper extends SubClassMapperBase<DefaultEntity> {
 
   static Uuid _$id(DefaultEntity v) => v.id;
   static const Field<DefaultEntity, Uuid> _f$id = Field('id', _$id);
+  static EntityType _$type(DefaultEntity v) => v.type;
+  static const Field<DefaultEntity, EntityType> _f$type = Field('type', _$type);
   static List<Relationship> _$relationships(DefaultEntity v) => v.relationships;
   static const Field<DefaultEntity, List<Relationship>> _f$relationships =
       Field('relationships', _$relationships);
-  static String _$type(DefaultEntity v) => v.type;
-  static const Field<DefaultEntity, String> _f$type = Field('type', _$type);
 
   @override
   final MappableFields<DefaultEntity> fields = const {
     #id: _f$id,
-    #relationships: _f$relationships,
     #type: _f$type,
+    #relationships: _f$relationships,
   };
 
   @override
@@ -1596,8 +1597,8 @@ class DefaultEntityMapper extends SubClassMapperBase<DefaultEntity> {
   static DefaultEntity _instantiate(DecodingData data) {
     return DefaultEntity(
         id: data.dec(_f$id),
-        relationships: data.dec(_f$relationships),
-        type: data.dec(_f$type));
+        type: data.dec(_f$type),
+        relationships: data.dec(_f$relationships));
   }
 
   @override
@@ -1657,7 +1658,7 @@ abstract class DefaultEntityCopyWith<$R, $In extends DefaultEntity, $Out>
   ListCopyWith<$R, Relationship, ObjectCopyWith<$R, Relationship, Relationship>>
       get relationships;
   @override
-  $R call({Uuid? id, List<Relationship>? relationships, String? type});
+  $R call({Uuid? id, EntityType? type, List<Relationship>? relationships});
   DefaultEntityCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -1676,17 +1677,17 @@ class _DefaultEntityCopyWithImpl<$R, $Out>
           (v, t) => ObjectCopyWith(v, $identity, t),
           (v) => call(relationships: v));
   @override
-  $R call({Uuid? id, List<Relationship>? relationships, String? type}) =>
+  $R call({Uuid? id, EntityType? type, List<Relationship>? relationships}) =>
       $apply(FieldCopyWithData({
         if (id != null) #id: id,
-        if (relationships != null) #relationships: relationships,
-        if (type != null) #type: type
+        if (type != null) #type: type,
+        if (relationships != null) #relationships: relationships
       }));
   @override
   DefaultEntity $make(CopyWithData data) => DefaultEntity(
       id: data.get(#id, or: $value.id),
-      relationships: data.get(#relationships, or: $value.relationships),
-      type: data.get(#type, or: $value.type));
+      type: data.get(#type, or: $value.type),
+      relationships: data.get(#relationships, or: $value.relationships));
 
   @override
   DefaultEntityCopyWith<$R2, DefaultEntity, $Out2> $chain<$R2, $Out2>(
