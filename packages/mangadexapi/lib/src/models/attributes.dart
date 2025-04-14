@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:mangadexapi/mangadexapi.dart';
-import 'package:mangadexapi/src/models/enums.dart';
 
 part 'attributes.mapper.dart';
 
@@ -126,6 +125,10 @@ class CoverArtAttributes with CoverArtAttributesMappable {
     required this.createdAt,
     required this.updatedAt,
   });
+
+  String url(Uuid mangaId) => "https://uploads.mangadex.org/covers/$mangaId/$fileName";
+  String url256(Uuid mangaId) => "https://uploads.mangadex.org/covers/$mangaId/$fileName.256.jpg";
+  String url512(Uuid mangaId) => "https://uploads.mangadex.org/covers/$mangaId/$fileName.512.jpg";
 }
 
 @MappableClass()

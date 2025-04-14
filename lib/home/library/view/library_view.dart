@@ -8,7 +8,11 @@ class LibraryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => LibraryBloc()..add(const LibraryStarted()), child: const _LibraryView());
+    return BlocProvider(
+      lazy: false,
+      create: (context) => LibraryBloc()..add(const LibraryStarted()),
+      child: const _LibraryView(),
+    );
   }
 }
 

@@ -2,29 +2,41 @@ import 'package:async/async.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mangadexapi/mangadexapi.dart';
+import 'package:mangadexapi/mangadexapi.dart' as mgd;
 
 part 'manga_bloc.mapper.dart';
 part 'manga_event.dart';
 part 'manga_state.dart';
 
 class MangaBloc extends Bloc<MangaEvent, MangaState> {
-  final MangadexApi _api;
+  final mgd.MangadexApi _api;
   final Map<String, CancelableOperation> _operations;
 
-  MangaBloc({required MangadexApi api}) : _api = api, _operations = {}, super(const MangaInitialState()) {
-    on<MangaLoaded>(_onMangaLoaded, transformer: droppable());
+  MangaBloc({required mgd.MangadexApi api}) : _api = api, _operations = {}, super(const MangaInitialState()) {
+    on<MangaFetched>(_onMangaFetched, transformer: droppable());
     on<MangaChaptersFetched>(_onChaptersFetched, transformer: droppable());
   }
 
-  Future<void> _onMangaLoaded(MangaLoaded event, Emitter<MangaState> emit) async {
+  Future<void> _onMangaFetched(MangaFetched event, Emitter<MangaState> emit) async {
     if (state is! MangaInitialState) return;
-    final manga = await _api.getMangaById(event.mangaId, includes: MangaIncludesOptions().coverArt());
-    emit(MangaLoadedState(status: ChapterStatus.loading, manga: manga.data));
+    final manga = await _api
+        .getMangaById(event.mangaId, includes: mgd.MangaIncludesOptions().author().coverArt())
+        .then((value) => value.data);
+    emit(
+      MangaFetchedState(
+        status: ChapterStatus.loading,
+        manga: manga,
+        chapters: [],
+        offsets: [],
+        limit: 20,
+        total: 0,
+        hasNextPage: true,
+      ),
+    );
   }
 
   Future<void> _onChaptersFetched(MangaChaptersFetched event, Emitter<MangaState> emit) async {
-    if (state case MangaLoadedState s) {
+    if (state case MangaFetchedState s) {
       final chaptersLength = s.chapters.isEmpty ? 0 : s.chapters.map((e) => e.length).reduce((a, b) => a + b);
       if (s.status == ChapterStatus.data && chaptersLength >= s.total) return;
 
@@ -34,7 +46,9 @@ class MangaBloc extends Bloc<MangaEvent, MangaState> {
           s.manga.id,
           limit: s.limit,
           offset: s.offsets.isEmpty ? 0 : s.offsets.last + s.limit,
-          includes: ChapterIncludesOptions().scanlationGroup(),
+          translatedLanguage: ["en"],
+          order: mgd.ChapterOrderOptions().volume(mgd.Order.desc).chapter(mgd.Order.desc),
+          includes: mgd.ChapterIncludesOptions().scanlationGroup(),
         ),
       );
       _operations[s.toString()] = operation;
@@ -51,7 +65,6 @@ class MangaBloc extends Bloc<MangaEvent, MangaState> {
           ),
         );
       } catch (e) {
-        print(e);
         emit(s.copyWith(status: ChapterStatus.error));
       } finally {
         _operations.remove(s.toString());

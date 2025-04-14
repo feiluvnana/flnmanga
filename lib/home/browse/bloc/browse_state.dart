@@ -6,27 +6,38 @@ enum BrowseStatus { loading, data, error }
 @MappableClass()
 class BrowseState with BrowseStateMappable {
   final BrowseStatus status;
-  final List<List<Manga>> mangas;
+  final List<List<mgd.Manga>> mangas;
   final List<int> offsets;
   final int limit;
   final int total;
   final bool hasNextPage;
-  final BrowseSearchParams searchParams;
+  final BrowseFilter filter;
 
   const BrowseState({
     required this.status,
-    this.mangas = const [],
-    this.offsets = const [],
-    this.limit = 18,
-    this.total = 0,
-    this.hasNextPage = true,
-    this.searchParams = const BrowseSearchParams(),
+    required this.mangas,
+    required this.offsets,
+    required this.limit,
+    required this.total,
+    required this.hasNextPage,
+    required this.filter,
   });
 }
 
 @MappableClass()
-class BrowseSearchParams with BrowseSearchParamsMappable {
+class BrowseFilter with BrowseFilterMappable {
   final String? title;
+  final List<mgd.Uuid>? includedTags;
+  final mgd.Condition? includedTagsMode;
+  final List<mgd.Uuid>? excludedTags;
+  final mgd.Condition? excludedTagsMode;
 
-  const BrowseSearchParams({this.title});
+  const BrowseFilter({this.title, this.includedTags, this.includedTagsMode, this.excludedTags, this.excludedTagsMode});
+
+  bool get isSearching =>
+      title?.isNotEmpty == true ||
+      includedTags?.isNotEmpty == true ||
+      excludedTags?.isNotEmpty == true ||
+      includedTagsMode != null ||
+      excludedTagsMode != null;
 }

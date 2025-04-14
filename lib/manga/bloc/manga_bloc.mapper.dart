@@ -6,108 +6,109 @@
 
 part of 'manga_bloc.dart';
 
-class MangaLoadedMapper extends ClassMapperBase<MangaLoaded> {
-  MangaLoadedMapper._();
+class MangaFetchedMapper extends ClassMapperBase<MangaFetched> {
+  MangaFetchedMapper._();
 
-  static MangaLoadedMapper? _instance;
-  static MangaLoadedMapper ensureInitialized() {
+  static MangaFetchedMapper? _instance;
+  static MangaFetchedMapper ensureInitialized() {
     if (_instance == null) {
-      MapperContainer.globals.use(_instance = MangaLoadedMapper._());
+      MapperContainer.globals.use(_instance = MangaFetchedMapper._());
     }
     return _instance!;
   }
 
   @override
-  final String id = 'MangaLoaded';
+  final String id = 'MangaFetched';
 
-  static Uuid _$mangaId(MangaLoaded v) => v.mangaId;
-  static const Field<MangaLoaded, Uuid> _f$mangaId =
+  static mgd.Uuid _$mangaId(MangaFetched v) => v.mangaId;
+  static const Field<MangaFetched, mgd.Uuid> _f$mangaId =
       Field('mangaId', _$mangaId);
 
   @override
-  final MappableFields<MangaLoaded> fields = const {
+  final MappableFields<MangaFetched> fields = const {
     #mangaId: _f$mangaId,
   };
 
-  static MangaLoaded _instantiate(DecodingData data) {
-    return MangaLoaded(mangaId: data.dec(_f$mangaId));
+  static MangaFetched _instantiate(DecodingData data) {
+    return MangaFetched(mangaId: data.dec(_f$mangaId));
   }
 
   @override
   final Function instantiate = _instantiate;
 
-  static MangaLoaded fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<MangaLoaded>(map);
+  static MangaFetched fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<MangaFetched>(map);
   }
 
-  static MangaLoaded fromJson(String json) {
-    return ensureInitialized().decodeJson<MangaLoaded>(json);
+  static MangaFetched fromJson(String json) {
+    return ensureInitialized().decodeJson<MangaFetched>(json);
   }
 }
 
-mixin MangaLoadedMappable {
+mixin MangaFetchedMappable {
   String toJson() {
-    return MangaLoadedMapper.ensureInitialized()
-        .encodeJson<MangaLoaded>(this as MangaLoaded);
+    return MangaFetchedMapper.ensureInitialized()
+        .encodeJson<MangaFetched>(this as MangaFetched);
   }
 
   Map<String, dynamic> toMap() {
-    return MangaLoadedMapper.ensureInitialized()
-        .encodeMap<MangaLoaded>(this as MangaLoaded);
+    return MangaFetchedMapper.ensureInitialized()
+        .encodeMap<MangaFetched>(this as MangaFetched);
   }
 
-  MangaLoadedCopyWith<MangaLoaded, MangaLoaded, MangaLoaded> get copyWith =>
-      _MangaLoadedCopyWithImpl<MangaLoaded, MangaLoaded>(
-          this as MangaLoaded, $identity, $identity);
+  MangaFetchedCopyWith<MangaFetched, MangaFetched, MangaFetched> get copyWith =>
+      _MangaFetchedCopyWithImpl<MangaFetched, MangaFetched>(
+          this as MangaFetched, $identity, $identity);
   @override
   String toString() {
-    return MangaLoadedMapper.ensureInitialized()
-        .stringifyValue(this as MangaLoaded);
+    return MangaFetchedMapper.ensureInitialized()
+        .stringifyValue(this as MangaFetched);
   }
 
   @override
   bool operator ==(Object other) {
-    return MangaLoadedMapper.ensureInitialized()
-        .equalsValue(this as MangaLoaded, other);
+    return MangaFetchedMapper.ensureInitialized()
+        .equalsValue(this as MangaFetched, other);
   }
 
   @override
   int get hashCode {
-    return MangaLoadedMapper.ensureInitialized().hashValue(this as MangaLoaded);
+    return MangaFetchedMapper.ensureInitialized()
+        .hashValue(this as MangaFetched);
   }
 }
 
-extension MangaLoadedValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, MangaLoaded, $Out> {
-  MangaLoadedCopyWith<$R, MangaLoaded, $Out> get $asMangaLoaded =>
-      $base.as((v, t, t2) => _MangaLoadedCopyWithImpl<$R, $Out>(v, t, t2));
+extension MangaFetchedValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, MangaFetched, $Out> {
+  MangaFetchedCopyWith<$R, MangaFetched, $Out> get $asMangaFetched =>
+      $base.as((v, t, t2) => _MangaFetchedCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
-abstract class MangaLoadedCopyWith<$R, $In extends MangaLoaded, $Out>
+abstract class MangaFetchedCopyWith<$R, $In extends MangaFetched, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({Uuid? mangaId});
-  MangaLoadedCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+  $R call({mgd.Uuid? mangaId});
+  MangaFetchedCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class _MangaLoadedCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, MangaLoaded, $Out>
-    implements MangaLoadedCopyWith<$R, MangaLoaded, $Out> {
-  _MangaLoadedCopyWithImpl(super.value, super.then, super.then2);
+class _MangaFetchedCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, MangaFetched, $Out>
+    implements MangaFetchedCopyWith<$R, MangaFetched, $Out> {
+  _MangaFetchedCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<MangaLoaded> $mapper =
-      MangaLoadedMapper.ensureInitialized();
+  late final ClassMapperBase<MangaFetched> $mapper =
+      MangaFetchedMapper.ensureInitialized();
   @override
-  $R call({Uuid? mangaId}) =>
+  $R call({mgd.Uuid? mangaId}) =>
       $apply(FieldCopyWithData({if (mangaId != null) #mangaId: mangaId}));
   @override
-  MangaLoaded $make(CopyWithData data) =>
-      MangaLoaded(mangaId: data.get(#mangaId, or: $value.mangaId));
+  MangaFetched $make(CopyWithData data) =>
+      MangaFetched(mangaId: data.get(#mangaId, or: $value.mangaId));
 
   @override
-  MangaLoadedCopyWith<$R2, MangaLoaded, $Out2> $chain<$R2, $Out2>(
+  MangaFetchedCopyWith<$R2, MangaFetched, $Out2> $chain<$R2, $Out2>(
           Then<$Out2, $R2> t) =>
-      _MangaLoadedCopyWithImpl<$R2, $Out2>($value, $cast, t);
+      _MangaFetchedCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class MangaChaptersFetchedMapper extends ClassMapperBase<MangaChaptersFetched> {
@@ -220,7 +221,7 @@ class MangaStateMapper extends ClassMapperBase<MangaState> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = MangaStateMapper._());
       MangaInitialStateMapper.ensureInitialized();
-      MangaLoadedStateMapper.ensureInitialized();
+      MangaFetchedStateMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -362,47 +363,45 @@ class _MangaInitialStateCopyWithImpl<$R, $Out>
       _MangaInitialStateCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class MangaLoadedStateMapper extends ClassMapperBase<MangaLoadedState> {
-  MangaLoadedStateMapper._();
+class MangaFetchedStateMapper extends ClassMapperBase<MangaFetchedState> {
+  MangaFetchedStateMapper._();
 
-  static MangaLoadedStateMapper? _instance;
-  static MangaLoadedStateMapper ensureInitialized() {
+  static MangaFetchedStateMapper? _instance;
+  static MangaFetchedStateMapper ensureInitialized() {
     if (_instance == null) {
-      MapperContainer.globals.use(_instance = MangaLoadedStateMapper._());
+      MapperContainer.globals.use(_instance = MangaFetchedStateMapper._());
       MangaStateMapper.ensureInitialized();
-      MangaMapper.ensureInitialized();
-      ChapterMapper.ensureInitialized();
+      mgd.MangaMapper.ensureInitialized();
+      mgd.ChapterMapper.ensureInitialized();
     }
     return _instance!;
   }
 
   @override
-  final String id = 'MangaLoadedState';
+  final String id = 'MangaFetchedState';
 
-  static Manga _$manga(MangaLoadedState v) => v.manga;
-  static const Field<MangaLoadedState, Manga> _f$manga =
+  static mgd.Manga _$manga(MangaFetchedState v) => v.manga;
+  static const Field<MangaFetchedState, mgd.Manga> _f$manga =
       Field('manga', _$manga);
-  static ChapterStatus _$status(MangaLoadedState v) => v.status;
-  static const Field<MangaLoadedState, ChapterStatus> _f$status =
+  static ChapterStatus _$status(MangaFetchedState v) => v.status;
+  static const Field<MangaFetchedState, ChapterStatus> _f$status =
       Field('status', _$status);
-  static List<List<Chapter>> _$chapters(MangaLoadedState v) => v.chapters;
-  static const Field<MangaLoadedState, List<List<Chapter>>> _f$chapters =
-      Field('chapters', _$chapters, opt: true, def: const []);
-  static List<int> _$offsets(MangaLoadedState v) => v.offsets;
-  static const Field<MangaLoadedState, List<int>> _f$offsets =
-      Field('offsets', _$offsets, opt: true, def: const []);
-  static int _$limit(MangaLoadedState v) => v.limit;
-  static const Field<MangaLoadedState, int> _f$limit =
-      Field('limit', _$limit, opt: true, def: 20);
-  static int _$total(MangaLoadedState v) => v.total;
-  static const Field<MangaLoadedState, int> _f$total =
-      Field('total', _$total, opt: true, def: 0);
-  static bool _$hasNextPage(MangaLoadedState v) => v.hasNextPage;
-  static const Field<MangaLoadedState, bool> _f$hasNextPage =
-      Field('hasNextPage', _$hasNextPage, opt: true, def: true);
+  static List<List<mgd.Chapter>> _$chapters(MangaFetchedState v) => v.chapters;
+  static const Field<MangaFetchedState, List<List<mgd.Chapter>>> _f$chapters =
+      Field('chapters', _$chapters);
+  static List<int> _$offsets(MangaFetchedState v) => v.offsets;
+  static const Field<MangaFetchedState, List<int>> _f$offsets =
+      Field('offsets', _$offsets);
+  static int _$limit(MangaFetchedState v) => v.limit;
+  static const Field<MangaFetchedState, int> _f$limit = Field('limit', _$limit);
+  static int _$total(MangaFetchedState v) => v.total;
+  static const Field<MangaFetchedState, int> _f$total = Field('total', _$total);
+  static bool _$hasNextPage(MangaFetchedState v) => v.hasNextPage;
+  static const Field<MangaFetchedState, bool> _f$hasNextPage =
+      Field('hasNextPage', _$hasNextPage);
 
   @override
-  final MappableFields<MangaLoadedState> fields = const {
+  final MappableFields<MangaFetchedState> fields = const {
     #manga: _f$manga,
     #status: _f$status,
     #chapters: _f$chapters,
@@ -412,8 +411,8 @@ class MangaLoadedStateMapper extends ClassMapperBase<MangaLoadedState> {
     #hasNextPage: _f$hasNextPage,
   };
 
-  static MangaLoadedState _instantiate(DecodingData data) {
-    return MangaLoadedState(
+  static MangaFetchedState _instantiate(DecodingData data) {
+    return MangaFetchedState(
         manga: data.dec(_f$manga),
         status: data.dec(_f$status),
         chapters: data.dec(_f$chapters),
@@ -426,89 +425,90 @@ class MangaLoadedStateMapper extends ClassMapperBase<MangaLoadedState> {
   @override
   final Function instantiate = _instantiate;
 
-  static MangaLoadedState fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<MangaLoadedState>(map);
+  static MangaFetchedState fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<MangaFetchedState>(map);
   }
 
-  static MangaLoadedState fromJson(String json) {
-    return ensureInitialized().decodeJson<MangaLoadedState>(json);
+  static MangaFetchedState fromJson(String json) {
+    return ensureInitialized().decodeJson<MangaFetchedState>(json);
   }
 }
 
-mixin MangaLoadedStateMappable {
+mixin MangaFetchedStateMappable {
   String toJson() {
-    return MangaLoadedStateMapper.ensureInitialized()
-        .encodeJson<MangaLoadedState>(this as MangaLoadedState);
+    return MangaFetchedStateMapper.ensureInitialized()
+        .encodeJson<MangaFetchedState>(this as MangaFetchedState);
   }
 
   Map<String, dynamic> toMap() {
-    return MangaLoadedStateMapper.ensureInitialized()
-        .encodeMap<MangaLoadedState>(this as MangaLoadedState);
+    return MangaFetchedStateMapper.ensureInitialized()
+        .encodeMap<MangaFetchedState>(this as MangaFetchedState);
   }
 
-  MangaLoadedStateCopyWith<MangaLoadedState, MangaLoadedState, MangaLoadedState>
+  MangaFetchedStateCopyWith<MangaFetchedState, MangaFetchedState,
+          MangaFetchedState>
       get copyWith =>
-          _MangaLoadedStateCopyWithImpl<MangaLoadedState, MangaLoadedState>(
-              this as MangaLoadedState, $identity, $identity);
+          _MangaFetchedStateCopyWithImpl<MangaFetchedState, MangaFetchedState>(
+              this as MangaFetchedState, $identity, $identity);
   @override
   String toString() {
-    return MangaLoadedStateMapper.ensureInitialized()
-        .stringifyValue(this as MangaLoadedState);
+    return MangaFetchedStateMapper.ensureInitialized()
+        .stringifyValue(this as MangaFetchedState);
   }
 
   @override
   bool operator ==(Object other) {
-    return MangaLoadedStateMapper.ensureInitialized()
-        .equalsValue(this as MangaLoadedState, other);
+    return MangaFetchedStateMapper.ensureInitialized()
+        .equalsValue(this as MangaFetchedState, other);
   }
 
   @override
   int get hashCode {
-    return MangaLoadedStateMapper.ensureInitialized()
-        .hashValue(this as MangaLoadedState);
+    return MangaFetchedStateMapper.ensureInitialized()
+        .hashValue(this as MangaFetchedState);
   }
 }
 
-extension MangaLoadedStateValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, MangaLoadedState, $Out> {
-  MangaLoadedStateCopyWith<$R, MangaLoadedState, $Out>
-      get $asMangaLoadedState => $base
-          .as((v, t, t2) => _MangaLoadedStateCopyWithImpl<$R, $Out>(v, t, t2));
+extension MangaFetchedStateValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, MangaFetchedState, $Out> {
+  MangaFetchedStateCopyWith<$R, MangaFetchedState, $Out>
+      get $asMangaFetchedState => $base
+          .as((v, t, t2) => _MangaFetchedStateCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
-abstract class MangaLoadedStateCopyWith<$R, $In extends MangaLoadedState, $Out>
-    implements MangaStateCopyWith<$R, $In, $Out> {
-  MangaCopyWith<$R, Manga, Manga> get manga;
-  ListCopyWith<$R, List<Chapter>,
-      ObjectCopyWith<$R, List<Chapter>, List<Chapter>>> get chapters;
+abstract class MangaFetchedStateCopyWith<$R, $In extends MangaFetchedState,
+    $Out> implements MangaStateCopyWith<$R, $In, $Out> {
+  mgd.MangaCopyWith<$R, mgd.Manga, mgd.Manga> get manga;
+  ListCopyWith<$R, List<mgd.Chapter>,
+      ObjectCopyWith<$R, List<mgd.Chapter>, List<mgd.Chapter>>> get chapters;
   ListCopyWith<$R, int, ObjectCopyWith<$R, int, int>> get offsets;
   @override
   $R call(
-      {Manga? manga,
+      {mgd.Manga? manga,
       ChapterStatus? status,
-      List<List<Chapter>>? chapters,
+      List<List<mgd.Chapter>>? chapters,
       List<int>? offsets,
       int? limit,
       int? total,
       bool? hasNextPage});
-  MangaLoadedStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+  MangaFetchedStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
 
-class _MangaLoadedStateCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, MangaLoadedState, $Out>
-    implements MangaLoadedStateCopyWith<$R, MangaLoadedState, $Out> {
-  _MangaLoadedStateCopyWithImpl(super.value, super.then, super.then2);
+class _MangaFetchedStateCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, MangaFetchedState, $Out>
+    implements MangaFetchedStateCopyWith<$R, MangaFetchedState, $Out> {
+  _MangaFetchedStateCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<MangaLoadedState> $mapper =
-      MangaLoadedStateMapper.ensureInitialized();
+  late final ClassMapperBase<MangaFetchedState> $mapper =
+      MangaFetchedStateMapper.ensureInitialized();
   @override
-  MangaCopyWith<$R, Manga, Manga> get manga =>
+  mgd.MangaCopyWith<$R, mgd.Manga, mgd.Manga> get manga =>
       $value.manga.copyWith.$chain((v) => call(manga: v));
   @override
-  ListCopyWith<$R, List<Chapter>,
-          ObjectCopyWith<$R, List<Chapter>, List<Chapter>>>
+  ListCopyWith<$R, List<mgd.Chapter>,
+          ObjectCopyWith<$R, List<mgd.Chapter>, List<mgd.Chapter>>>
       get chapters => ListCopyWith($value.chapters,
           (v, t) => ObjectCopyWith(v, $identity, t), (v) => call(chapters: v));
   @override
@@ -517,9 +517,9 @@ class _MangaLoadedStateCopyWithImpl<$R, $Out>
           (v) => call(offsets: v));
   @override
   $R call(
-          {Manga? manga,
+          {mgd.Manga? manga,
           ChapterStatus? status,
-          List<List<Chapter>>? chapters,
+          List<List<mgd.Chapter>>? chapters,
           List<int>? offsets,
           int? limit,
           int? total,
@@ -534,7 +534,7 @@ class _MangaLoadedStateCopyWithImpl<$R, $Out>
         if (hasNextPage != null) #hasNextPage: hasNextPage
       }));
   @override
-  MangaLoadedState $make(CopyWithData data) => MangaLoadedState(
+  MangaFetchedState $make(CopyWithData data) => MangaFetchedState(
       manga: data.get(#manga, or: $value.manga),
       status: data.get(#status, or: $value.status),
       chapters: data.get(#chapters, or: $value.chapters),
@@ -544,7 +544,7 @@ class _MangaLoadedStateCopyWithImpl<$R, $Out>
       hasNextPage: data.get(#hasNextPage, or: $value.hasNextPage));
 
   @override
-  MangaLoadedStateCopyWith<$R2, MangaLoadedState, $Out2> $chain<$R2, $Out2>(
+  MangaFetchedStateCopyWith<$R2, MangaFetchedState, $Out2> $chain<$R2, $Out2>(
           Then<$Out2, $R2> t) =>
-      _MangaLoadedStateCopyWithImpl<$R2, $Out2>($value, $cast, t);
+      _MangaFetchedStateCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }

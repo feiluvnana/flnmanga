@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:mangadexapi/mangadexapi.dart';
-import 'package:mangadexapi/src/models/enums.dart';
 import 'package:mangadexapi/src/models/responses.dart';
 import 'package:mangadexapi/src/utils/cache.dart';
 
@@ -35,6 +34,13 @@ class MangadexApi {
 
   Future<void> wipeCache() async {
     await _cache.wipe();
+  }
+
+  Future<AtHomeResponse> getAtHomeByChapterId(Uuid id, {bool? forcePort443}) async {
+    final uri = Uri.parse(
+      "$_baseUrl/at-home/server/$id",
+    ).replace(queryParameters: {if (forcePort443 != null) "forcePort443": forcePort443.toString()});
+    return _get<AtHomeResponse>(uri, AtHomeResponseMapper.fromJson);
   }
 
   Future<CollectionResponse<Author>> getAuthors({

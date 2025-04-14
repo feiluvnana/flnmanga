@@ -1,16 +1,18 @@
 import 'package:extended_image/extended_image.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
-import 'package:mangadexapi/mangadexapi.dart';
+import 'package:mangadexapi/mangadexapi.dart' as mgd;
+import 'package:material_symbols_icons/symbols.dart';
 
 class MangaCard extends StatelessWidget {
-  final Manga manga;
+  final mgd.Manga manga;
   final VoidCallback? onTap;
 
   const MangaCard({super.key, required this.manga, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    final coverArtAttributes = manga.relationships.whereType<CoverArtRelationship>().firstOrNull?.attributes;
+    final coverArtAttributes = manga.relationships.whereType<mgd.CoverArtRelationship>().firstOrNull?.attributes;
 
     return Card(
       clipBehavior: Clip.antiAlias,
@@ -22,7 +24,7 @@ class MangaCard extends StatelessWidget {
               child:
                   coverArtAttributes != null
                       ? ExtendedImage.network(
-                        "https://uploads.mangadex.org/covers/${manga.id}/${coverArtAttributes.fileName}.256.jpg",
+                        coverArtAttributes.url256(manga.id),
                         fit: BoxFit.cover,
                         cache: true,
                         cacheWidth: 256,
@@ -32,7 +34,7 @@ class MangaCard extends StatelessWidget {
                                     ? const Center(child: CircularProgressIndicator(year2023: false))
                                     : state.completedWidget,
                       )
-                      : const Center(child: Icon(Icons.image_not_supported)),
+                      : const Center(child: Icon(Symbols.image_not_supported_rounded)),
             ),
             const _GradientOverlay(),
             Positioned(
@@ -43,12 +45,33 @@ class MangaCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    manga.attributes.title["en"] ?? "No title",
+                    manga.attributes.title["en"] ?? manga.attributes.title["ja-ro"] ?? "No title",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
-                  Text(manga.attributes.status.name, style: Theme.of(context).textTheme.bodySmall),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        WidgetSpan(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 2),
+                            child: switch (manga.attributes.status) {
+                              mgd.MangaStatus.ongoing => const Icon(Symbols.play_arrow_rounded, fill: 1, size: 16),
+                              mgd.MangaStatus.completed => const Icon(Symbols.done_all_rounded, fill: 1, size: 16),
+                              mgd.MangaStatus.hiatus => const Icon(Symbols.pause_rounded, fill: 1, size: 16),
+                              mgd.MangaStatus.cancelled => const Icon(Symbols.cancel_rounded, fill: 1, size: 16),
+                            },
+                          ),
+                          alignment: PlaceholderAlignment.middle,
+                        ),
+                        TextSpan(
+                          text: manga.attributes.status.name.capitalize,
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

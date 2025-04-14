@@ -10,13 +10,13 @@ class BrowseMangasFetched extends BrowseEvent with BrowseMangasFetchedMappable {
 }
 
 @MappableClass()
-class BrowseSearchParamsChanged extends BrowseEvent with BrowseSearchParamsChangedMappable {
-  final String? title;
-
-  const BrowseSearchParamsChanged({this.title});
+class BrowserMangasRefreshed extends BrowseEvent with BrowserMangasRefreshedMappable {
+  const BrowserMangasRefreshed();
 }
 
 @MappableClass()
-class BrowserMangasRefreshed extends BrowseEvent with BrowserMangasRefreshedMappable {
-  const BrowserMangasRefreshed();
+class BrowseSearchParamsChanged extends BrowseEvent with BrowseSearchParamsChangedMappable {
+  final BrowseFilter Function(BrowseFilter) fn;
+
+  const BrowseSearchParamsChanged({required this.fn});
 }

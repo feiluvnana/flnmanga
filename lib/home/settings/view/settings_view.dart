@@ -9,6 +9,7 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
+      lazy: false,
       create: (context) => SettingsBloc()..add(const SettingsStarted()),
       child: const _SettingsView(),
     );
@@ -20,23 +21,6 @@ class _SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SettingsBloc, SettingsState>(
-      builder: (context, state) {
-        return Scaffold(appBar: AppBar(title: const Text('Settings')), body: Center(child: _buildBody(state)));
-      },
-    );
-  }
-
-  Widget _buildBody(SettingsState state) {
-    switch (state.status) {
-      case SettingsStatus.initial:
-        return const Text('Initial State');
-      case SettingsStatus.loading:
-        return const CircularProgressIndicator();
-      case SettingsStatus.loaded:
-        return const Text('Loaded State');
-      case SettingsStatus.error:
-        return Text('Error: ${state.errorMessage}');
-    }
+    return Scaffold(appBar: AppBar(title: const Text('Settings')));
   }
 }

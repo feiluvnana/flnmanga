@@ -8,26 +8,46 @@ class Response with ResponseMappable {
   const Response();
 }
 
-@MappableClass(discriminatorValue: "success", discriminatorKey: "response")
-class SuccessResponse extends Response with SuccessResponseMappable {
-  const SuccessResponse();
+@MappableClass(discriminatorValue: "ok", discriminatorKey: "response")
+class OkResponse extends Response with OkResponseMappable {
+  const OkResponse();
 }
 
 @MappableClass(discriminatorValue: "entity")
-class EntityResponse<T extends Entity> extends SuccessResponse with EntityResponseMappable<T> {
+class EntityResponse<T extends Entity> extends OkResponse with EntityResponseMappable<T> {
   final T data;
 
   EntityResponse({required this.data});
 }
 
 @MappableClass(discriminatorValue: "collection")
-class CollectionResponse<T extends Entity> extends SuccessResponse with CollectionResponseMappable<T> {
+class CollectionResponse<T extends Entity> extends OkResponse with CollectionResponseMappable<T> {
   final List<T> data;
   final int limit;
   final int offset;
   final int total;
 
   CollectionResponse({required this.data, required this.limit, required this.offset, required this.total});
+}
+
+@MappableClass(discriminatorValue: MappableClass.useAsDefault)
+class AtHomeResponse extends OkResponse with AtHomeResponseMappable {
+  final String baseUrl;
+  final AtHomeChapter chapter;
+
+  const AtHomeResponse({required this.baseUrl, required this.chapter});
+
+  List<String> get dataUrls => chapter.data.map((e) => "$baseUrl/data/${chapter.hash}/$e").toList();
+  List<String> get dataSaverUrls => chapter.dataSaver.map((e) => "$baseUrl/data-saver/${chapter.hash}/$e").toList();
+}
+
+@MappableClass()
+class AtHomeChapter with AtHomeChapterMappable {
+  final String hash;
+  final List<String> data;
+  final List<String> dataSaver;
+
+  const AtHomeChapter({required this.hash, required this.data, required this.dataSaver});
 }
 
 @MappableClass(discriminatorValue: "error")

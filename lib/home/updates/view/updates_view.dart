@@ -8,7 +8,11 @@ class UpdatesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => UpdatesBloc()..add(const UpdatesStarted()), child: const _UpdatesView());
+    return BlocProvider(
+      lazy: false,
+      create: (context) => UpdatesBloc()..add(const UpdatesStarted()),
+      child: const _UpdatesView(),
+    );
   }
 }
 
@@ -17,23 +21,6 @@ class _UpdatesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UpdatesBloc, UpdatesState>(
-      builder: (context, state) {
-        return Scaffold(appBar: AppBar(title: const Text('Updates')), body: Center(child: _buildBody(state)));
-      },
-    );
-  }
-
-  Widget _buildBody(UpdatesState state) {
-    switch (state.status) {
-      case UpdatesStatus.initial:
-        return const Text('Initial State');
-      case UpdatesStatus.loading:
-        return const CircularProgressIndicator();
-      case UpdatesStatus.loaded:
-        return const Text('Loaded State');
-      case UpdatesStatus.error:
-        return Text('Error: ${state.errorMessage}');
-    }
+    return Scaffold(appBar: AppBar(title: const Text('Updates')));
   }
 }

@@ -5,10 +5,10 @@ sealed class MangaEvent {
 }
 
 @MappableClass()
-class MangaLoaded extends MangaEvent with MangaLoadedMappable {
-  final Uuid mangaId;
+class MangaFetched extends MangaEvent with MangaFetchedMappable {
+  final mgd.Uuid mangaId;
 
-  const MangaLoaded({required this.mangaId});
+  const MangaFetched({required this.mangaId});
 }
 
 @MappableClass()

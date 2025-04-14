@@ -2,20 +2,30 @@ import 'package:async/async.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:mangadexapi/mangadexapi.dart';
+import 'package:mangadexapi/mangadexapi.dart' as mgd;
 
 part 'browse_bloc.mapper.dart';
 part 'browse_event.dart';
 part 'browse_state.dart';
 
 class BrowseBloc extends Bloc<BrowseEvent, BrowseState> {
-  final MangadexApi _api;
+  final mgd.MangadexApi _api;
   final Map<String, CancelableOperation> _operations;
 
-  BrowseBloc({required MangadexApi api})
+  BrowseBloc({required mgd.MangadexApi api})
     : _api = api,
       _operations = {},
-      super(const BrowseState(status: BrowseStatus.loading)) {
+      super(
+        const BrowseState(
+          status: BrowseStatus.loading,
+          mangas: [],
+          offsets: [],
+          limit: 18,
+          total: 0,
+          hasNextPage: true,
+          filter: BrowseFilter(),
+        ),
+      ) {
     on<BrowseMangasFetched>(_onMangaFetched, transformer: droppable());
     on<BrowserMangasRefreshed>(_onMangaRefreshed, transformer: droppable());
     on<BrowseSearchParamsChanged>(_onSearchParamsChanged, transformer: droppable());
@@ -32,8 +42,12 @@ class BrowseBloc extends Bloc<BrowseEvent, BrowseState> {
       _api.getMangas(
         limit: state.limit,
         offset: state.offsets.isEmpty ? 0 : state.offsets.last + state.limit,
-        includes: MangaIncludesOptions().coverArt(),
-        title: state.searchParams.title,
+        includes: mgd.MangaIncludesOptions().coverArt(),
+        title: state.filter.title,
+        includedTags: state.filter.includedTags,
+        includedTagsMode: state.filter.includedTagsMode,
+        excludedTags: state.filter.excludedTags,
+        excludedTagsMode: state.filter.excludedTagsMode,
       ),
     );
     _operations[state.toString()] = operation;
@@ -69,16 +83,11 @@ class BrowseBloc extends Bloc<BrowseEvent, BrowseState> {
   }
 
   Future<void> _onSearchParamsChanged(BrowseSearchParamsChanged event, Emitter<BrowseState> emit) async {
-    emit(
-      state.copyWith(
-        searchParams: state.searchParams.copyWith(title: event.title?.isNotEmpty == true ? event.title : null),
-      ),
-    );
+    emit(state.copyWith(filter: event.fn(state.filter)));
   }
 
   @override
   Future<void> close() async {
-    // Cancel all operations
     await Future.wait(_operations.values.map((e) => e.cancel()));
     _operations.clear();
     return super.close();

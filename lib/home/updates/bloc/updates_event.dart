@@ -6,11 +6,11 @@ class UpdatesEvent with UpdatesEventMappable {
 }
 
 @MappableClass()
-class UpdatesStarted extends UpdatesEvent {
+class UpdatesStarted extends UpdatesEvent with UpdatesStartedMappable {
   const UpdatesStarted();
 }
 
 @MappableClass()
-class UpdatesRefresh extends UpdatesEvent {
+class UpdatesRefresh extends UpdatesEvent with UpdatesRefreshMappable {
   const UpdatesRefresh();
 }

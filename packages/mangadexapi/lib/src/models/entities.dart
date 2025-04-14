@@ -1,6 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:mangadexapi/mangadexapi.dart';
-import 'package:mangadexapi/src/models/enums.dart';
 
 part 'entities.mapper.dart';
 

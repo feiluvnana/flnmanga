@@ -21,28 +21,28 @@ class HomeView extends StatelessWidget {
         },
         items: [
           SalomonBottomBarItem(
-            icon: const Icon(Symbols.book),
-            activeIcon: const Icon(Symbols.book, fill: 1),
+            icon: const Icon(Symbols.book_rounded),
+            activeIcon: const Icon(Symbols.book_rounded, fill: 1),
             title: const Text("Library"),
           ),
           SalomonBottomBarItem(
-            icon: const Icon(Symbols.work_update),
-            activeIcon: const Icon(Symbols.work_update, fill: 1),
+            icon: const Icon(Symbols.work_update_rounded),
+            activeIcon: const Icon(Symbols.work_update_rounded, fill: 1),
             title: const Text("Updates"),
           ),
           SalomonBottomBarItem(
-            icon: const Icon(Symbols.work_history),
-            activeIcon: const Icon(Symbols.work_history, fill: 1),
+            icon: const Icon(Symbols.work_history_rounded),
+            activeIcon: const Icon(Symbols.work_history_rounded, fill: 1),
             title: const Text("History"),
           ),
           SalomonBottomBarItem(
-            icon: const Icon(Symbols.browse),
-            activeIcon: const Icon(Symbols.browse, fill: 1),
+            icon: const Icon(Symbols.browse_rounded),
+            activeIcon: const Icon(Symbols.browse_rounded, fill: 1),
             title: const Text("Browse"),
           ),
           SalomonBottomBarItem(
-            icon: const Icon(Symbols.settings),
-            activeIcon: const Icon(Symbols.settings, fill: 1),
+            icon: const Icon(Symbols.settings_rounded),
+            activeIcon: const Icon(Symbols.settings_rounded, fill: 1),
             title: const Text("Settings"),
           ),
         ],

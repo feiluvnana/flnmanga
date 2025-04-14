@@ -106,122 +106,6 @@ class _BrowseMangasFetchedCopyWithImpl<$R, $Out>
           _BrowseMangasFetchedCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class BrowseSearchParamsChangedMapper
-    extends ClassMapperBase<BrowseSearchParamsChanged> {
-  BrowseSearchParamsChangedMapper._();
-
-  static BrowseSearchParamsChangedMapper? _instance;
-  static BrowseSearchParamsChangedMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals
-          .use(_instance = BrowseSearchParamsChangedMapper._());
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'BrowseSearchParamsChanged';
-
-  static String? _$title(BrowseSearchParamsChanged v) => v.title;
-  static const Field<BrowseSearchParamsChanged, String> _f$title =
-      Field('title', _$title, opt: true);
-
-  @override
-  final MappableFields<BrowseSearchParamsChanged> fields = const {
-    #title: _f$title,
-  };
-
-  static BrowseSearchParamsChanged _instantiate(DecodingData data) {
-    return BrowseSearchParamsChanged(title: data.dec(_f$title));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static BrowseSearchParamsChanged fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<BrowseSearchParamsChanged>(map);
-  }
-
-  static BrowseSearchParamsChanged fromJson(String json) {
-    return ensureInitialized().decodeJson<BrowseSearchParamsChanged>(json);
-  }
-}
-
-mixin BrowseSearchParamsChangedMappable {
-  String toJson() {
-    return BrowseSearchParamsChangedMapper.ensureInitialized()
-        .encodeJson<BrowseSearchParamsChanged>(
-            this as BrowseSearchParamsChanged);
-  }
-
-  Map<String, dynamic> toMap() {
-    return BrowseSearchParamsChangedMapper.ensureInitialized()
-        .encodeMap<BrowseSearchParamsChanged>(
-            this as BrowseSearchParamsChanged);
-  }
-
-  BrowseSearchParamsChangedCopyWith<BrowseSearchParamsChanged,
-          BrowseSearchParamsChanged, BrowseSearchParamsChanged>
-      get copyWith => _BrowseSearchParamsChangedCopyWithImpl<
-              BrowseSearchParamsChanged, BrowseSearchParamsChanged>(
-          this as BrowseSearchParamsChanged, $identity, $identity);
-  @override
-  String toString() {
-    return BrowseSearchParamsChangedMapper.ensureInitialized()
-        .stringifyValue(this as BrowseSearchParamsChanged);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return BrowseSearchParamsChangedMapper.ensureInitialized()
-        .equalsValue(this as BrowseSearchParamsChanged, other);
-  }
-
-  @override
-  int get hashCode {
-    return BrowseSearchParamsChangedMapper.ensureInitialized()
-        .hashValue(this as BrowseSearchParamsChanged);
-  }
-}
-
-extension BrowseSearchParamsChangedValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, BrowseSearchParamsChanged, $Out> {
-  BrowseSearchParamsChangedCopyWith<$R, BrowseSearchParamsChanged, $Out>
-      get $asBrowseSearchParamsChanged => $base.as((v, t, t2) =>
-          _BrowseSearchParamsChangedCopyWithImpl<$R, $Out>(v, t, t2));
-}
-
-abstract class BrowseSearchParamsChangedCopyWith<
-    $R,
-    $In extends BrowseSearchParamsChanged,
-    $Out> implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? title});
-  BrowseSearchParamsChangedCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-      Then<$Out2, $R2> t);
-}
-
-class _BrowseSearchParamsChangedCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, BrowseSearchParamsChanged, $Out>
-    implements
-        BrowseSearchParamsChangedCopyWith<$R, BrowseSearchParamsChanged, $Out> {
-  _BrowseSearchParamsChangedCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<BrowseSearchParamsChanged> $mapper =
-      BrowseSearchParamsChangedMapper.ensureInitialized();
-  @override
-  $R call({Object? title = $none}) =>
-      $apply(FieldCopyWithData({if (title != $none) #title: title}));
-  @override
-  BrowseSearchParamsChanged $make(CopyWithData data) =>
-      BrowseSearchParamsChanged(title: data.get(#title, or: $value.title));
-
-  @override
-  BrowseSearchParamsChangedCopyWith<$R2, BrowseSearchParamsChanged, $Out2>
-      $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-          _BrowseSearchParamsChangedCopyWithImpl<$R2, $Out2>($value, $cast, t);
-}
-
 class BrowserMangasRefreshedMapper
     extends ClassMapperBase<BrowserMangasRefreshed> {
   BrowserMangasRefreshedMapper._();
@@ -327,6 +211,124 @@ class _BrowserMangasRefreshedCopyWithImpl<$R, $Out>
           _BrowserMangasRefreshedCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
+class BrowseSearchParamsChangedMapper
+    extends ClassMapperBase<BrowseSearchParamsChanged> {
+  BrowseSearchParamsChangedMapper._();
+
+  static BrowseSearchParamsChangedMapper? _instance;
+  static BrowseSearchParamsChangedMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals
+          .use(_instance = BrowseSearchParamsChangedMapper._());
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'BrowseSearchParamsChanged';
+
+  static Function _$fn(BrowseSearchParamsChanged v) =>
+      (v as dynamic).fn as Function;
+  static dynamic _arg$fn(f) => f<BrowseFilter Function(BrowseFilter)>();
+  static const Field<BrowseSearchParamsChanged, Function> _f$fn =
+      Field('fn', _$fn, arg: _arg$fn);
+
+  @override
+  final MappableFields<BrowseSearchParamsChanged> fields = const {
+    #fn: _f$fn,
+  };
+
+  static BrowseSearchParamsChanged _instantiate(DecodingData data) {
+    return BrowseSearchParamsChanged(fn: data.dec(_f$fn));
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static BrowseSearchParamsChanged fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<BrowseSearchParamsChanged>(map);
+  }
+
+  static BrowseSearchParamsChanged fromJson(String json) {
+    return ensureInitialized().decodeJson<BrowseSearchParamsChanged>(json);
+  }
+}
+
+mixin BrowseSearchParamsChangedMappable {
+  String toJson() {
+    return BrowseSearchParamsChangedMapper.ensureInitialized()
+        .encodeJson<BrowseSearchParamsChanged>(
+            this as BrowseSearchParamsChanged);
+  }
+
+  Map<String, dynamic> toMap() {
+    return BrowseSearchParamsChangedMapper.ensureInitialized()
+        .encodeMap<BrowseSearchParamsChanged>(
+            this as BrowseSearchParamsChanged);
+  }
+
+  BrowseSearchParamsChangedCopyWith<BrowseSearchParamsChanged,
+          BrowseSearchParamsChanged, BrowseSearchParamsChanged>
+      get copyWith => _BrowseSearchParamsChangedCopyWithImpl<
+              BrowseSearchParamsChanged, BrowseSearchParamsChanged>(
+          this as BrowseSearchParamsChanged, $identity, $identity);
+  @override
+  String toString() {
+    return BrowseSearchParamsChangedMapper.ensureInitialized()
+        .stringifyValue(this as BrowseSearchParamsChanged);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return BrowseSearchParamsChangedMapper.ensureInitialized()
+        .equalsValue(this as BrowseSearchParamsChanged, other);
+  }
+
+  @override
+  int get hashCode {
+    return BrowseSearchParamsChangedMapper.ensureInitialized()
+        .hashValue(this as BrowseSearchParamsChanged);
+  }
+}
+
+extension BrowseSearchParamsChangedValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, BrowseSearchParamsChanged, $Out> {
+  BrowseSearchParamsChangedCopyWith<$R, BrowseSearchParamsChanged, $Out>
+      get $asBrowseSearchParamsChanged => $base.as((v, t, t2) =>
+          _BrowseSearchParamsChangedCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class BrowseSearchParamsChangedCopyWith<
+    $R,
+    $In extends BrowseSearchParamsChanged,
+    $Out> implements ClassCopyWith<$R, $In, $Out> {
+  $R call({BrowseFilter Function(BrowseFilter)? fn});
+  BrowseSearchParamsChangedCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+      Then<$Out2, $R2> t);
+}
+
+class _BrowseSearchParamsChangedCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, BrowseSearchParamsChanged, $Out>
+    implements
+        BrowseSearchParamsChangedCopyWith<$R, BrowseSearchParamsChanged, $Out> {
+  _BrowseSearchParamsChangedCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<BrowseSearchParamsChanged> $mapper =
+      BrowseSearchParamsChangedMapper.ensureInitialized();
+  @override
+  $R call({BrowseFilter Function(BrowseFilter)? fn}) =>
+      $apply(FieldCopyWithData({if (fn != null) #fn: fn}));
+  @override
+  BrowseSearchParamsChanged $make(CopyWithData data) =>
+      BrowseSearchParamsChanged(fn: data.get(#fn, or: $value.fn));
+
+  @override
+  BrowseSearchParamsChangedCopyWith<$R2, BrowseSearchParamsChanged, $Out2>
+      $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+          _BrowseSearchParamsChangedCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
 class BrowseStatusMapper extends EnumMapper<BrowseStatus> {
   BrowseStatusMapper._();
 
@@ -385,8 +387,8 @@ class BrowseStateMapper extends ClassMapperBase<BrowseState> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = BrowseStateMapper._());
       BrowseStatusMapper.ensureInitialized();
-      MangaMapper.ensureInitialized();
-      BrowseSearchParamsMapper.ensureInitialized();
+      mgd.MangaMapper.ensureInitialized();
+      BrowseFilterMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -397,25 +399,22 @@ class BrowseStateMapper extends ClassMapperBase<BrowseState> {
   static BrowseStatus _$status(BrowseState v) => v.status;
   static const Field<BrowseState, BrowseStatus> _f$status =
       Field('status', _$status);
-  static List<List<Manga>> _$mangas(BrowseState v) => v.mangas;
-  static const Field<BrowseState, List<List<Manga>>> _f$mangas =
-      Field('mangas', _$mangas, opt: true, def: const []);
+  static List<List<mgd.Manga>> _$mangas(BrowseState v) => v.mangas;
+  static const Field<BrowseState, List<List<mgd.Manga>>> _f$mangas =
+      Field('mangas', _$mangas);
   static List<int> _$offsets(BrowseState v) => v.offsets;
   static const Field<BrowseState, List<int>> _f$offsets =
-      Field('offsets', _$offsets, opt: true, def: const []);
+      Field('offsets', _$offsets);
   static int _$limit(BrowseState v) => v.limit;
-  static const Field<BrowseState, int> _f$limit =
-      Field('limit', _$limit, opt: true, def: 18);
+  static const Field<BrowseState, int> _f$limit = Field('limit', _$limit);
   static int _$total(BrowseState v) => v.total;
-  static const Field<BrowseState, int> _f$total =
-      Field('total', _$total, opt: true, def: 0);
+  static const Field<BrowseState, int> _f$total = Field('total', _$total);
   static bool _$hasNextPage(BrowseState v) => v.hasNextPage;
   static const Field<BrowseState, bool> _f$hasNextPage =
-      Field('hasNextPage', _$hasNextPage, opt: true, def: true);
-  static BrowseSearchParams _$searchParams(BrowseState v) => v.searchParams;
-  static const Field<BrowseState, BrowseSearchParams> _f$searchParams = Field(
-      'searchParams', _$searchParams,
-      opt: true, def: const BrowseSearchParams());
+      Field('hasNextPage', _$hasNextPage);
+  static BrowseFilter _$filter(BrowseState v) => v.filter;
+  static const Field<BrowseState, BrowseFilter> _f$filter =
+      Field('filter', _$filter);
 
   @override
   final MappableFields<BrowseState> fields = const {
@@ -425,7 +424,7 @@ class BrowseStateMapper extends ClassMapperBase<BrowseState> {
     #limit: _f$limit,
     #total: _f$total,
     #hasNextPage: _f$hasNextPage,
-    #searchParams: _f$searchParams,
+    #filter: _f$filter,
   };
 
   static BrowseState _instantiate(DecodingData data) {
@@ -436,7 +435,7 @@ class BrowseStateMapper extends ClassMapperBase<BrowseState> {
         limit: data.dec(_f$limit),
         total: data.dec(_f$total),
         hasNextPage: data.dec(_f$hasNextPage),
-        searchParams: data.dec(_f$searchParams));
+        filter: data.dec(_f$filter));
   }
 
   @override
@@ -491,19 +490,18 @@ extension BrowseStateValueCopy<$R, $Out>
 
 abstract class BrowseStateCopyWith<$R, $In extends BrowseState, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  ListCopyWith<$R, List<Manga>, ObjectCopyWith<$R, List<Manga>, List<Manga>>>
-      get mangas;
+  ListCopyWith<$R, List<mgd.Manga>,
+      ObjectCopyWith<$R, List<mgd.Manga>, List<mgd.Manga>>> get mangas;
   ListCopyWith<$R, int, ObjectCopyWith<$R, int, int>> get offsets;
-  BrowseSearchParamsCopyWith<$R, BrowseSearchParams, BrowseSearchParams>
-      get searchParams;
+  BrowseFilterCopyWith<$R, BrowseFilter, BrowseFilter> get filter;
   $R call(
       {BrowseStatus? status,
-      List<List<Manga>>? mangas,
+      List<List<mgd.Manga>>? mangas,
       List<int>? offsets,
       int? limit,
       int? total,
       bool? hasNextPage,
-      BrowseSearchParams? searchParams});
+      BrowseFilter? filter});
   BrowseStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -516,7 +514,8 @@ class _BrowseStateCopyWithImpl<$R, $Out>
   late final ClassMapperBase<BrowseState> $mapper =
       BrowseStateMapper.ensureInitialized();
   @override
-  ListCopyWith<$R, List<Manga>, ObjectCopyWith<$R, List<Manga>, List<Manga>>>
+  ListCopyWith<$R, List<mgd.Manga>,
+          ObjectCopyWith<$R, List<mgd.Manga>, List<mgd.Manga>>>
       get mangas => ListCopyWith($value.mangas,
           (v, t) => ObjectCopyWith(v, $identity, t), (v) => call(mangas: v));
   @override
@@ -524,18 +523,17 @@ class _BrowseStateCopyWithImpl<$R, $Out>
       ListCopyWith($value.offsets, (v, t) => ObjectCopyWith(v, $identity, t),
           (v) => call(offsets: v));
   @override
-  BrowseSearchParamsCopyWith<$R, BrowseSearchParams, BrowseSearchParams>
-      get searchParams =>
-          $value.searchParams.copyWith.$chain((v) => call(searchParams: v));
+  BrowseFilterCopyWith<$R, BrowseFilter, BrowseFilter> get filter =>
+      $value.filter.copyWith.$chain((v) => call(filter: v));
   @override
   $R call(
           {BrowseStatus? status,
-          List<List<Manga>>? mangas,
+          List<List<mgd.Manga>>? mangas,
           List<int>? offsets,
           int? limit,
           int? total,
           bool? hasNextPage,
-          BrowseSearchParams? searchParams}) =>
+          BrowseFilter? filter}) =>
       $apply(FieldCopyWithData({
         if (status != null) #status: status,
         if (mangas != null) #mangas: mangas,
@@ -543,7 +541,7 @@ class _BrowseStateCopyWithImpl<$R, $Out>
         if (limit != null) #limit: limit,
         if (total != null) #total: total,
         if (hasNextPage != null) #hasNextPage: hasNextPage,
-        if (searchParams != null) #searchParams: searchParams
+        if (filter != null) #filter: filter
       }));
   @override
   BrowseState $make(CopyWithData data) => BrowseState(
@@ -553,7 +551,7 @@ class _BrowseStateCopyWithImpl<$R, $Out>
       limit: data.get(#limit, or: $value.limit),
       total: data.get(#total, or: $value.total),
       hasNextPage: data.get(#hasNextPage, or: $value.hasNextPage),
-      searchParams: data.get(#searchParams, or: $value.searchParams));
+      filter: data.get(#filter, or: $value.filter));
 
   @override
   BrowseStateCopyWith<$R2, BrowseState, $Out2> $chain<$R2, $Out2>(
@@ -561,110 +559,173 @@ class _BrowseStateCopyWithImpl<$R, $Out>
       _BrowseStateCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class BrowseSearchParamsMapper extends ClassMapperBase<BrowseSearchParams> {
-  BrowseSearchParamsMapper._();
+class BrowseFilterMapper extends ClassMapperBase<BrowseFilter> {
+  BrowseFilterMapper._();
 
-  static BrowseSearchParamsMapper? _instance;
-  static BrowseSearchParamsMapper ensureInitialized() {
+  static BrowseFilterMapper? _instance;
+  static BrowseFilterMapper ensureInitialized() {
     if (_instance == null) {
-      MapperContainer.globals.use(_instance = BrowseSearchParamsMapper._());
+      MapperContainer.globals.use(_instance = BrowseFilterMapper._());
+      mgd.ConditionMapper.ensureInitialized();
     }
     return _instance!;
   }
 
   @override
-  final String id = 'BrowseSearchParams';
+  final String id = 'BrowseFilter';
 
-  static String? _$title(BrowseSearchParams v) => v.title;
-  static const Field<BrowseSearchParams, String> _f$title =
+  static String? _$title(BrowseFilter v) => v.title;
+  static const Field<BrowseFilter, String> _f$title =
       Field('title', _$title, opt: true);
+  static List<mgd.Uuid>? _$includedTags(BrowseFilter v) => v.includedTags;
+  static const Field<BrowseFilter, List<mgd.Uuid>> _f$includedTags =
+      Field('includedTags', _$includedTags, opt: true);
+  static mgd.Condition? _$includedTagsMode(BrowseFilter v) =>
+      v.includedTagsMode;
+  static const Field<BrowseFilter, mgd.Condition> _f$includedTagsMode =
+      Field('includedTagsMode', _$includedTagsMode, opt: true);
+  static List<mgd.Uuid>? _$excludedTags(BrowseFilter v) => v.excludedTags;
+  static const Field<BrowseFilter, List<mgd.Uuid>> _f$excludedTags =
+      Field('excludedTags', _$excludedTags, opt: true);
+  static mgd.Condition? _$excludedTagsMode(BrowseFilter v) =>
+      v.excludedTagsMode;
+  static const Field<BrowseFilter, mgd.Condition> _f$excludedTagsMode =
+      Field('excludedTagsMode', _$excludedTagsMode, opt: true);
 
   @override
-  final MappableFields<BrowseSearchParams> fields = const {
+  final MappableFields<BrowseFilter> fields = const {
     #title: _f$title,
+    #includedTags: _f$includedTags,
+    #includedTagsMode: _f$includedTagsMode,
+    #excludedTags: _f$excludedTags,
+    #excludedTagsMode: _f$excludedTagsMode,
   };
 
-  static BrowseSearchParams _instantiate(DecodingData data) {
-    return BrowseSearchParams(title: data.dec(_f$title));
+  static BrowseFilter _instantiate(DecodingData data) {
+    return BrowseFilter(
+        title: data.dec(_f$title),
+        includedTags: data.dec(_f$includedTags),
+        includedTagsMode: data.dec(_f$includedTagsMode),
+        excludedTags: data.dec(_f$excludedTags),
+        excludedTagsMode: data.dec(_f$excludedTagsMode));
   }
 
   @override
   final Function instantiate = _instantiate;
 
-  static BrowseSearchParams fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<BrowseSearchParams>(map);
+  static BrowseFilter fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<BrowseFilter>(map);
   }
 
-  static BrowseSearchParams fromJson(String json) {
-    return ensureInitialized().decodeJson<BrowseSearchParams>(json);
+  static BrowseFilter fromJson(String json) {
+    return ensureInitialized().decodeJson<BrowseFilter>(json);
   }
 }
 
-mixin BrowseSearchParamsMappable {
+mixin BrowseFilterMappable {
   String toJson() {
-    return BrowseSearchParamsMapper.ensureInitialized()
-        .encodeJson<BrowseSearchParams>(this as BrowseSearchParams);
+    return BrowseFilterMapper.ensureInitialized()
+        .encodeJson<BrowseFilter>(this as BrowseFilter);
   }
 
   Map<String, dynamic> toMap() {
-    return BrowseSearchParamsMapper.ensureInitialized()
-        .encodeMap<BrowseSearchParams>(this as BrowseSearchParams);
+    return BrowseFilterMapper.ensureInitialized()
+        .encodeMap<BrowseFilter>(this as BrowseFilter);
   }
 
-  BrowseSearchParamsCopyWith<BrowseSearchParams, BrowseSearchParams,
-          BrowseSearchParams>
-      get copyWith => _BrowseSearchParamsCopyWithImpl<BrowseSearchParams,
-          BrowseSearchParams>(this as BrowseSearchParams, $identity, $identity);
+  BrowseFilterCopyWith<BrowseFilter, BrowseFilter, BrowseFilter> get copyWith =>
+      _BrowseFilterCopyWithImpl<BrowseFilter, BrowseFilter>(
+          this as BrowseFilter, $identity, $identity);
   @override
   String toString() {
-    return BrowseSearchParamsMapper.ensureInitialized()
-        .stringifyValue(this as BrowseSearchParams);
+    return BrowseFilterMapper.ensureInitialized()
+        .stringifyValue(this as BrowseFilter);
   }
 
   @override
   bool operator ==(Object other) {
-    return BrowseSearchParamsMapper.ensureInitialized()
-        .equalsValue(this as BrowseSearchParams, other);
+    return BrowseFilterMapper.ensureInitialized()
+        .equalsValue(this as BrowseFilter, other);
   }
 
   @override
   int get hashCode {
-    return BrowseSearchParamsMapper.ensureInitialized()
-        .hashValue(this as BrowseSearchParams);
+    return BrowseFilterMapper.ensureInitialized()
+        .hashValue(this as BrowseFilter);
   }
 }
 
-extension BrowseSearchParamsValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, BrowseSearchParams, $Out> {
-  BrowseSearchParamsCopyWith<$R, BrowseSearchParams, $Out>
-      get $asBrowseSearchParams => $base.as(
-          (v, t, t2) => _BrowseSearchParamsCopyWithImpl<$R, $Out>(v, t, t2));
+extension BrowseFilterValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, BrowseFilter, $Out> {
+  BrowseFilterCopyWith<$R, BrowseFilter, $Out> get $asBrowseFilter =>
+      $base.as((v, t, t2) => _BrowseFilterCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
-abstract class BrowseSearchParamsCopyWith<$R, $In extends BrowseSearchParams,
-    $Out> implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? title});
-  BrowseSearchParamsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-      Then<$Out2, $R2> t);
+abstract class BrowseFilterCopyWith<$R, $In extends BrowseFilter, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
+  ListCopyWith<$R, mgd.Uuid, ObjectCopyWith<$R, mgd.Uuid, mgd.Uuid>>?
+      get includedTags;
+  ListCopyWith<$R, mgd.Uuid, ObjectCopyWith<$R, mgd.Uuid, mgd.Uuid>>?
+      get excludedTags;
+  $R call(
+      {String? title,
+      List<mgd.Uuid>? includedTags,
+      mgd.Condition? includedTagsMode,
+      List<mgd.Uuid>? excludedTags,
+      mgd.Condition? excludedTagsMode});
+  BrowseFilterCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class _BrowseSearchParamsCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, BrowseSearchParams, $Out>
-    implements BrowseSearchParamsCopyWith<$R, BrowseSearchParams, $Out> {
-  _BrowseSearchParamsCopyWithImpl(super.value, super.then, super.then2);
+class _BrowseFilterCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, BrowseFilter, $Out>
+    implements BrowseFilterCopyWith<$R, BrowseFilter, $Out> {
+  _BrowseFilterCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<BrowseSearchParams> $mapper =
-      BrowseSearchParamsMapper.ensureInitialized();
+  late final ClassMapperBase<BrowseFilter> $mapper =
+      BrowseFilterMapper.ensureInitialized();
   @override
-  $R call({Object? title = $none}) =>
-      $apply(FieldCopyWithData({if (title != $none) #title: title}));
+  ListCopyWith<$R, mgd.Uuid, ObjectCopyWith<$R, mgd.Uuid, mgd.Uuid>>?
+      get includedTags => $value.includedTags != null
+          ? ListCopyWith(
+              $value.includedTags!,
+              (v, t) => ObjectCopyWith(v, $identity, t),
+              (v) => call(includedTags: v))
+          : null;
   @override
-  BrowseSearchParams $make(CopyWithData data) =>
-      BrowseSearchParams(title: data.get(#title, or: $value.title));
+  ListCopyWith<$R, mgd.Uuid, ObjectCopyWith<$R, mgd.Uuid, mgd.Uuid>>?
+      get excludedTags => $value.excludedTags != null
+          ? ListCopyWith(
+              $value.excludedTags!,
+              (v, t) => ObjectCopyWith(v, $identity, t),
+              (v) => call(excludedTags: v))
+          : null;
+  @override
+  $R call(
+          {Object? title = $none,
+          Object? includedTags = $none,
+          Object? includedTagsMode = $none,
+          Object? excludedTags = $none,
+          Object? excludedTagsMode = $none}) =>
+      $apply(FieldCopyWithData({
+        if (title != $none) #title: title,
+        if (includedTags != $none) #includedTags: includedTags,
+        if (includedTagsMode != $none) #includedTagsMode: includedTagsMode,
+        if (excludedTags != $none) #excludedTags: excludedTags,
+        if (excludedTagsMode != $none) #excludedTagsMode: excludedTagsMode
+      }));
+  @override
+  BrowseFilter $make(CopyWithData data) => BrowseFilter(
+      title: data.get(#title, or: $value.title),
+      includedTags: data.get(#includedTags, or: $value.includedTags),
+      includedTagsMode:
+          data.get(#includedTagsMode, or: $value.includedTagsMode),
+      excludedTags: data.get(#excludedTags, or: $value.excludedTags),
+      excludedTagsMode:
+          data.get(#excludedTagsMode, or: $value.excludedTagsMode));
 
   @override
-  BrowseSearchParamsCopyWith<$R2, BrowseSearchParams, $Out2> $chain<$R2, $Out2>(
+  BrowseFilterCopyWith<$R2, BrowseFilter, $Out2> $chain<$R2, $Out2>(
           Then<$Out2, $R2> t) =>
-      _BrowseSearchParamsCopyWithImpl<$R2, $Out2>($value, $cast, t);
+      _BrowseFilterCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }

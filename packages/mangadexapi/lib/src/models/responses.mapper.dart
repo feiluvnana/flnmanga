@@ -13,7 +13,7 @@ class ResponseMapper extends ClassMapperBase<Response> {
   static ResponseMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ResponseMapper._());
-      SuccessResponseMapper.ensureInitialized();
+      OkResponseMapper.ensureInitialized();
       ErrorResponseMapper.ensureInitialized();
     }
     return _instance!;
@@ -102,114 +102,112 @@ class _ResponseCopyWithImpl<$R, $Out>
       _ResponseCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
-class SuccessResponseMapper extends SubClassMapperBase<SuccessResponse> {
-  SuccessResponseMapper._();
+class OkResponseMapper extends SubClassMapperBase<OkResponse> {
+  OkResponseMapper._();
 
-  static SuccessResponseMapper? _instance;
-  static SuccessResponseMapper ensureInitialized() {
+  static OkResponseMapper? _instance;
+  static OkResponseMapper ensureInitialized() {
     if (_instance == null) {
-      MapperContainer.globals.use(_instance = SuccessResponseMapper._());
+      MapperContainer.globals.use(_instance = OkResponseMapper._());
       ResponseMapper.ensureInitialized().addSubMapper(_instance!);
       EntityResponseMapper.ensureInitialized();
       CollectionResponseMapper.ensureInitialized();
+      AtHomeResponseMapper.ensureInitialized();
     }
     return _instance!;
   }
 
   @override
-  final String id = 'SuccessResponse';
+  final String id = 'OkResponse';
 
   @override
-  final MappableFields<SuccessResponse> fields = const {};
+  final MappableFields<OkResponse> fields = const {};
 
   @override
   final String discriminatorKey = 'result';
   @override
-  final dynamic discriminatorValue = "success";
+  final dynamic discriminatorValue = "ok";
   @override
   late final ClassMapperBase superMapper = ResponseMapper.ensureInitialized();
 
-  static SuccessResponse _instantiate(DecodingData data) {
-    return SuccessResponse();
+  static OkResponse _instantiate(DecodingData data) {
+    return OkResponse();
   }
 
   @override
   final Function instantiate = _instantiate;
 
-  static SuccessResponse fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<SuccessResponse>(map);
+  static OkResponse fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<OkResponse>(map);
   }
 
-  static SuccessResponse fromJson(String json) {
-    return ensureInitialized().decodeJson<SuccessResponse>(json);
+  static OkResponse fromJson(String json) {
+    return ensureInitialized().decodeJson<OkResponse>(json);
   }
 }
 
-mixin SuccessResponseMappable {
+mixin OkResponseMappable {
   String toJson() {
-    return SuccessResponseMapper.ensureInitialized()
-        .encodeJson<SuccessResponse>(this as SuccessResponse);
+    return OkResponseMapper.ensureInitialized()
+        .encodeJson<OkResponse>(this as OkResponse);
   }
 
   Map<String, dynamic> toMap() {
-    return SuccessResponseMapper.ensureInitialized()
-        .encodeMap<SuccessResponse>(this as SuccessResponse);
+    return OkResponseMapper.ensureInitialized()
+        .encodeMap<OkResponse>(this as OkResponse);
   }
 
-  SuccessResponseCopyWith<SuccessResponse, SuccessResponse, SuccessResponse>
-      get copyWith =>
-          _SuccessResponseCopyWithImpl<SuccessResponse, SuccessResponse>(
-              this as SuccessResponse, $identity, $identity);
+  OkResponseCopyWith<OkResponse, OkResponse, OkResponse> get copyWith =>
+      _OkResponseCopyWithImpl<OkResponse, OkResponse>(
+          this as OkResponse, $identity, $identity);
   @override
   String toString() {
-    return SuccessResponseMapper.ensureInitialized()
-        .stringifyValue(this as SuccessResponse);
+    return OkResponseMapper.ensureInitialized()
+        .stringifyValue(this as OkResponse);
   }
 
   @override
   bool operator ==(Object other) {
-    return SuccessResponseMapper.ensureInitialized()
-        .equalsValue(this as SuccessResponse, other);
+    return OkResponseMapper.ensureInitialized()
+        .equalsValue(this as OkResponse, other);
   }
 
   @override
   int get hashCode {
-    return SuccessResponseMapper.ensureInitialized()
-        .hashValue(this as SuccessResponse);
+    return OkResponseMapper.ensureInitialized().hashValue(this as OkResponse);
   }
 }
 
-extension SuccessResponseValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, SuccessResponse, $Out> {
-  SuccessResponseCopyWith<$R, SuccessResponse, $Out> get $asSuccessResponse =>
-      $base.as((v, t, t2) => _SuccessResponseCopyWithImpl<$R, $Out>(v, t, t2));
+extension OkResponseValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, OkResponse, $Out> {
+  OkResponseCopyWith<$R, OkResponse, $Out> get $asOkResponse =>
+      $base.as((v, t, t2) => _OkResponseCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
-abstract class SuccessResponseCopyWith<$R, $In extends SuccessResponse, $Out>
+abstract class OkResponseCopyWith<$R, $In extends OkResponse, $Out>
     implements ResponseCopyWith<$R, $In, $Out> {
   @override
   $R call();
-  SuccessResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-      Then<$Out2, $R2> t);
+  OkResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class _SuccessResponseCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, SuccessResponse, $Out>
-    implements SuccessResponseCopyWith<$R, SuccessResponse, $Out> {
-  _SuccessResponseCopyWithImpl(super.value, super.then, super.then2);
+class _OkResponseCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, OkResponse, $Out>
+    implements OkResponseCopyWith<$R, OkResponse, $Out> {
+  _OkResponseCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<SuccessResponse> $mapper =
-      SuccessResponseMapper.ensureInitialized();
+  late final ClassMapperBase<OkResponse> $mapper =
+      OkResponseMapper.ensureInitialized();
   @override
   $R call() => $apply(FieldCopyWithData({}));
   @override
-  SuccessResponse $make(CopyWithData data) => SuccessResponse();
+  OkResponse $make(CopyWithData data) => OkResponse();
 
   @override
-  SuccessResponseCopyWith<$R2, SuccessResponse, $Out2> $chain<$R2, $Out2>(
+  OkResponseCopyWith<$R2, OkResponse, $Out2> $chain<$R2, $Out2>(
           Then<$Out2, $R2> t) =>
-      _SuccessResponseCopyWithImpl<$R2, $Out2>($value, $cast, t);
+      _OkResponseCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class EntityResponseMapper extends SubClassMapperBase<EntityResponse> {
@@ -219,7 +217,7 @@ class EntityResponseMapper extends SubClassMapperBase<EntityResponse> {
   static EntityResponseMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = EntityResponseMapper._());
-      SuccessResponseMapper.ensureInitialized().addSubMapper(_instance!);
+      OkResponseMapper.ensureInitialized().addSubMapper(_instance!);
       EntityMapper.ensureInitialized();
     }
     return _instance!;
@@ -245,8 +243,7 @@ class EntityResponseMapper extends SubClassMapperBase<EntityResponse> {
   @override
   final dynamic discriminatorValue = "entity";
   @override
-  late final ClassMapperBase superMapper =
-      SuccessResponseMapper.ensureInitialized();
+  late final ClassMapperBase superMapper = OkResponseMapper.ensureInitialized();
 
   @override
   DecodingContext inherit(DecodingContext context) {
@@ -312,7 +309,7 @@ extension EntityResponseValueCopy<$R, $Out, T extends Entity>
 }
 
 abstract class EntityResponseCopyWith<$R, $In extends EntityResponse<T>, $Out,
-    T extends Entity> implements SuccessResponseCopyWith<$R, $In, $Out> {
+    T extends Entity> implements OkResponseCopyWith<$R, $In, $Out> {
   @override
   $R call({T? data});
   EntityResponseCopyWith<$R2, $In, $Out2, T> $chain<$R2, $Out2>(
@@ -347,7 +344,7 @@ class CollectionResponseMapper extends SubClassMapperBase<CollectionResponse> {
   static CollectionResponseMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = CollectionResponseMapper._());
-      SuccessResponseMapper.ensureInitialized().addSubMapper(_instance!);
+      OkResponseMapper.ensureInitialized().addSubMapper(_instance!);
       EntityMapper.ensureInitialized();
     }
     return _instance!;
@@ -386,8 +383,7 @@ class CollectionResponseMapper extends SubClassMapperBase<CollectionResponse> {
   @override
   final dynamic discriminatorValue = "collection";
   @override
-  late final ClassMapperBase superMapper =
-      SuccessResponseMapper.ensureInitialized();
+  late final ClassMapperBase superMapper = OkResponseMapper.ensureInitialized();
 
   @override
   DecodingContext inherit(DecodingContext context) {
@@ -460,7 +456,7 @@ extension CollectionResponseValueCopy<$R, $Out, T extends Entity>
 }
 
 abstract class CollectionResponseCopyWith<$R, $In extends CollectionResponse<T>,
-    $Out, T extends Entity> implements SuccessResponseCopyWith<$R, $In, $Out> {
+    $Out, T extends Entity> implements OkResponseCopyWith<$R, $In, $Out> {
   ListCopyWith<$R, T, ObjectCopyWith<$R, T, T>> get data;
   @override
   $R call({List<T>? data, int? limit, int? offset, int? total});
@@ -500,6 +496,267 @@ class _CollectionResponseCopyWithImpl<$R, $Out, T extends Entity>
   CollectionResponseCopyWith<$R2, CollectionResponse<T>, $Out2, T>
       $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
           _CollectionResponseCopyWithImpl<$R2, $Out2, T>($value, $cast, t);
+}
+
+class AtHomeResponseMapper extends SubClassMapperBase<AtHomeResponse> {
+  AtHomeResponseMapper._();
+
+  static AtHomeResponseMapper? _instance;
+  static AtHomeResponseMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = AtHomeResponseMapper._());
+      OkResponseMapper.ensureInitialized().addSubMapper(_instance!);
+      AtHomeChapterMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'AtHomeResponse';
+
+  static String _$baseUrl(AtHomeResponse v) => v.baseUrl;
+  static const Field<AtHomeResponse, String> _f$baseUrl =
+      Field('baseUrl', _$baseUrl);
+  static AtHomeChapter _$chapter(AtHomeResponse v) => v.chapter;
+  static const Field<AtHomeResponse, AtHomeChapter> _f$chapter =
+      Field('chapter', _$chapter);
+
+  @override
+  final MappableFields<AtHomeResponse> fields = const {
+    #baseUrl: _f$baseUrl,
+    #chapter: _f$chapter,
+  };
+
+  @override
+  final String discriminatorKey = 'response';
+  @override
+  final dynamic discriminatorValue = MappableClass.useAsDefault;
+  @override
+  late final ClassMapperBase superMapper = OkResponseMapper.ensureInitialized();
+
+  static AtHomeResponse _instantiate(DecodingData data) {
+    return AtHomeResponse(
+        baseUrl: data.dec(_f$baseUrl), chapter: data.dec(_f$chapter));
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static AtHomeResponse fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<AtHomeResponse>(map);
+  }
+
+  static AtHomeResponse fromJson(String json) {
+    return ensureInitialized().decodeJson<AtHomeResponse>(json);
+  }
+}
+
+mixin AtHomeResponseMappable {
+  String toJson() {
+    return AtHomeResponseMapper.ensureInitialized()
+        .encodeJson<AtHomeResponse>(this as AtHomeResponse);
+  }
+
+  Map<String, dynamic> toMap() {
+    return AtHomeResponseMapper.ensureInitialized()
+        .encodeMap<AtHomeResponse>(this as AtHomeResponse);
+  }
+
+  AtHomeResponseCopyWith<AtHomeResponse, AtHomeResponse, AtHomeResponse>
+      get copyWith =>
+          _AtHomeResponseCopyWithImpl<AtHomeResponse, AtHomeResponse>(
+              this as AtHomeResponse, $identity, $identity);
+  @override
+  String toString() {
+    return AtHomeResponseMapper.ensureInitialized()
+        .stringifyValue(this as AtHomeResponse);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return AtHomeResponseMapper.ensureInitialized()
+        .equalsValue(this as AtHomeResponse, other);
+  }
+
+  @override
+  int get hashCode {
+    return AtHomeResponseMapper.ensureInitialized()
+        .hashValue(this as AtHomeResponse);
+  }
+}
+
+extension AtHomeResponseValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, AtHomeResponse, $Out> {
+  AtHomeResponseCopyWith<$R, AtHomeResponse, $Out> get $asAtHomeResponse =>
+      $base.as((v, t, t2) => _AtHomeResponseCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class AtHomeResponseCopyWith<$R, $In extends AtHomeResponse, $Out>
+    implements OkResponseCopyWith<$R, $In, $Out> {
+  AtHomeChapterCopyWith<$R, AtHomeChapter, AtHomeChapter> get chapter;
+  @override
+  $R call({String? baseUrl, AtHomeChapter? chapter});
+  AtHomeResponseCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+      Then<$Out2, $R2> t);
+}
+
+class _AtHomeResponseCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, AtHomeResponse, $Out>
+    implements AtHomeResponseCopyWith<$R, AtHomeResponse, $Out> {
+  _AtHomeResponseCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<AtHomeResponse> $mapper =
+      AtHomeResponseMapper.ensureInitialized();
+  @override
+  AtHomeChapterCopyWith<$R, AtHomeChapter, AtHomeChapter> get chapter =>
+      $value.chapter.copyWith.$chain((v) => call(chapter: v));
+  @override
+  $R call({String? baseUrl, AtHomeChapter? chapter}) =>
+      $apply(FieldCopyWithData({
+        if (baseUrl != null) #baseUrl: baseUrl,
+        if (chapter != null) #chapter: chapter
+      }));
+  @override
+  AtHomeResponse $make(CopyWithData data) => AtHomeResponse(
+      baseUrl: data.get(#baseUrl, or: $value.baseUrl),
+      chapter: data.get(#chapter, or: $value.chapter));
+
+  @override
+  AtHomeResponseCopyWith<$R2, AtHomeResponse, $Out2> $chain<$R2, $Out2>(
+          Then<$Out2, $R2> t) =>
+      _AtHomeResponseCopyWithImpl<$R2, $Out2>($value, $cast, t);
+}
+
+class AtHomeChapterMapper extends ClassMapperBase<AtHomeChapter> {
+  AtHomeChapterMapper._();
+
+  static AtHomeChapterMapper? _instance;
+  static AtHomeChapterMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = AtHomeChapterMapper._());
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'AtHomeChapter';
+
+  static String _$hash(AtHomeChapter v) => v.hash;
+  static const Field<AtHomeChapter, String> _f$hash = Field('hash', _$hash);
+  static List<String> _$data(AtHomeChapter v) => v.data;
+  static const Field<AtHomeChapter, List<String>> _f$data =
+      Field('data', _$data);
+  static List<String> _$dataSaver(AtHomeChapter v) => v.dataSaver;
+  static const Field<AtHomeChapter, List<String>> _f$dataSaver =
+      Field('dataSaver', _$dataSaver);
+
+  @override
+  final MappableFields<AtHomeChapter> fields = const {
+    #hash: _f$hash,
+    #data: _f$data,
+    #dataSaver: _f$dataSaver,
+  };
+
+  static AtHomeChapter _instantiate(DecodingData data) {
+    return AtHomeChapter(
+        hash: data.dec(_f$hash),
+        data: data.dec(_f$data),
+        dataSaver: data.dec(_f$dataSaver));
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static AtHomeChapter fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<AtHomeChapter>(map);
+  }
+
+  static AtHomeChapter fromJson(String json) {
+    return ensureInitialized().decodeJson<AtHomeChapter>(json);
+  }
+}
+
+mixin AtHomeChapterMappable {
+  String toJson() {
+    return AtHomeChapterMapper.ensureInitialized()
+        .encodeJson<AtHomeChapter>(this as AtHomeChapter);
+  }
+
+  Map<String, dynamic> toMap() {
+    return AtHomeChapterMapper.ensureInitialized()
+        .encodeMap<AtHomeChapter>(this as AtHomeChapter);
+  }
+
+  AtHomeChapterCopyWith<AtHomeChapter, AtHomeChapter, AtHomeChapter>
+      get copyWith => _AtHomeChapterCopyWithImpl<AtHomeChapter, AtHomeChapter>(
+          this as AtHomeChapter, $identity, $identity);
+  @override
+  String toString() {
+    return AtHomeChapterMapper.ensureInitialized()
+        .stringifyValue(this as AtHomeChapter);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return AtHomeChapterMapper.ensureInitialized()
+        .equalsValue(this as AtHomeChapter, other);
+  }
+
+  @override
+  int get hashCode {
+    return AtHomeChapterMapper.ensureInitialized()
+        .hashValue(this as AtHomeChapter);
+  }
+}
+
+extension AtHomeChapterValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, AtHomeChapter, $Out> {
+  AtHomeChapterCopyWith<$R, AtHomeChapter, $Out> get $asAtHomeChapter =>
+      $base.as((v, t, t2) => _AtHomeChapterCopyWithImpl<$R, $Out>(v, t, t2));
+}
+
+abstract class AtHomeChapterCopyWith<$R, $In extends AtHomeChapter, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get data;
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get dataSaver;
+  $R call({String? hash, List<String>? data, List<String>? dataSaver});
+  AtHomeChapterCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
+}
+
+class _AtHomeChapterCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, AtHomeChapter, $Out>
+    implements AtHomeChapterCopyWith<$R, AtHomeChapter, $Out> {
+  _AtHomeChapterCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<AtHomeChapter> $mapper =
+      AtHomeChapterMapper.ensureInitialized();
+  @override
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get data =>
+      ListCopyWith($value.data, (v, t) => ObjectCopyWith(v, $identity, t),
+          (v) => call(data: v));
+  @override
+  ListCopyWith<$R, String, ObjectCopyWith<$R, String, String>> get dataSaver =>
+      ListCopyWith($value.dataSaver, (v, t) => ObjectCopyWith(v, $identity, t),
+          (v) => call(dataSaver: v));
+  @override
+  $R call({String? hash, List<String>? data, List<String>? dataSaver}) =>
+      $apply(FieldCopyWithData({
+        if (hash != null) #hash: hash,
+        if (data != null) #data: data,
+        if (dataSaver != null) #dataSaver: dataSaver
+      }));
+  @override
+  AtHomeChapter $make(CopyWithData data) => AtHomeChapter(
+      hash: data.get(#hash, or: $value.hash),
+      data: data.get(#data, or: $value.data),
+      dataSaver: data.get(#dataSaver, or: $value.dataSaver));
+
+  @override
+  AtHomeChapterCopyWith<$R2, AtHomeChapter, $Out2> $chain<$R2, $Out2>(
+          Then<$Out2, $R2> t) =>
+      _AtHomeChapterCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class ErrorResponseMapper extends SubClassMapperBase<ErrorResponse> {
